@@ -1,1 +1,25 @@
-<p>layout works!</p>
+<div class="app-shell">
+  <mat-sidenav-container class="app-container">
+    <mat-sidenav
+      #sidenav
+      class="app-sidebar"
+      mode="side"
+      opened
+      [fixedInViewport]="false"
+    >
+      <app-sidebar></app-sidebar>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="app-content">
+      <header class="app-header">
+        <app-header></app-header>
+      </header>
+
+      <main class="app-main">
+        <section class="content-card">
+          <router-outlet></router-outlet>
+        </section>
+      </main>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

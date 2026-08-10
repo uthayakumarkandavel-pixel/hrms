@@ -1,35 +1,6 @@
-.login-page {
-  min-height: 100vh;
-
+.login-options {
   display: flex;
-  align-items: center;
+  gap: 16px;
   justify-content: center;
-
-  padding: 24px;
-
-  background: #f8fafc;
-}
-
-mat-card {
-  width: 100%;
-  max-width: 420px;
-  padding: 24px;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-mat-form-field {
-  width: 100%;
-}
-
-button {
-  width: 100%;
-}
-
-mat-card-actions {
-  padding: 16px 0 0;
+  align-items: center;
 }

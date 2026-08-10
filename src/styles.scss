@@ -1,26 +1,14 @@
 @use '@angular/material' as mat;
 
-html {
-  height: 100%;
-}
-
+html,
 body {
+  width: 100%;
   height: 100%;
   margin: 0;
-
-  font-family:
-    Inter,
-    Roboto,
-    "Helvetica Neue",
-    sans-serif;
-
-  background: #f8fafc;
-  color: #0f172a;
 }
 
-/* Angular Material theme */
-
 html {
+  box-sizing: border-box;
   @include mat.theme((
     color: (
       primary: mat.$blue-palette,
@@ -31,24 +19,33 @@ html {
   ));
 }
 
-/* App theme variables */
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: Inter, Roboto, "Helvetica Neue", sans-serif;
+  background: #f5f7fb;
+  color: #172033;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
 
 :root {
   --primary: #1d4ed8;
   --primary-hover: #1e40af;
-  --background: #f8fafc;
-  --text: #0f172a;
-  --muted: #64748b;
-  --border: #cbd5e1;
+  --background: #f5f7fb;
+  --surface: #ffffff;
+  --text: #172033;
+  --muted: #667085;
+  --border: #e6eaf0;
 }
-
-/* Material field customization */
 
 .mat-mdc-form-field {
   width: 100%;
 }
-
-/* Primary buttons */
 
 .mat-mdc-unelevated-button {
   --mdc-filled-button-container-color: #1d4ed8;
