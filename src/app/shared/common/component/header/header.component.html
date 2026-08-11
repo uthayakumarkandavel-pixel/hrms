@@ -1,40 +1,60 @@
 <div class="header-content">
-  <div class="header-left"></div>
-  <div class="header-actions">
-    <button mat-icon-button class="header-action" aria-label="Notifications">
-      <mat-icon> notifications </mat-icon>
-      <span class="notification-badge"> 3 </span>
-    </button>
-
+  <div class="header-left">
     <button
       mat-icon-button
-      class="header-action"
-      [matMenuTriggerFor]="userMenu"
-      aria-label="User menu"
+      class="sidebar-toggle"
+      type="button"
+      aria-label="Toggle sidebar"
+      (click)="toggleSidebar.emit()"
     >
-      <mat-icon> account_circle </mat-icon>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div class="header-brand">
+      <div class="header-brand-mark">
+        <img src="/assets/logo.png" alt="HRMS" />
+      </div>
+      <div class="header-brand-copy">
+        <strong>HRMS</strong>
+        <span>People workspace</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="header-actions">
+    <button mat-icon-button class="header-action" aria-label="Search">
+      <mat-icon>search</mat-icon>
+    </button>
+
+    <button mat-icon-button class="header-action notification" aria-label="Notifications">
+      <mat-icon>notifications_none</mat-icon>
+      <span class="notification-badge">3</span>
+    </button>
+
+    <div class="profile-divider"></div>
+
+    <button mat-button class="profile-button" [matMenuTriggerFor]="userMenu">
+      <span class="avatar">HR</span>
+      <span class="profile-copy">
+        <strong>My Account</strong>
+        <small>Account settings</small>
+      </span>
+      <mat-icon>keyboard_arrow_down</mat-icon>
     </button>
   </div>
 </div>
 
 <mat-menu #userMenu="matMenu">
   <button mat-menu-item>
-    <mat-icon> person </mat-icon>
-
-    <span> Profile </span>
+    <mat-icon>person_outline</mat-icon>
+    <span>Profile</span>
   </button>
-
   <button mat-menu-item>
-    <mat-icon> settings </mat-icon>
-
-    <span> Settings </span>
+    <mat-icon>settings</mat-icon>
+    <span>Settings</span>
   </button>
-
   <mat-divider></mat-divider>
-
   <button mat-menu-item (click)="logout()">
-    <mat-icon> logout </mat-icon>
-
-    <span> Logout </span>
+    <mat-icon>logout</mat-icon>
+    <span>Logout</span>
   </button>
 </mat-menu>

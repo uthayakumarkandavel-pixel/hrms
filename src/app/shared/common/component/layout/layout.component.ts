@@ -20,4 +20,10 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss'
 })
-export class LayoutComponent {}
+export class LayoutComponent {
+  sidebarOpen = true;
+
+  toggleSidebar(): void {
+    this.sidebarOpen = !this.sidebarOpen;
+  }
+}

@@ -1,1 +1,61 @@
-<p>leave-management works!</p>
+<div class="leave-page">
+  <div class="page-header">
+    <div>
+      <h1>{{ LEAVE_MANAGEMENT.TITLE }}</h1>
+
+      <p>{{ LEAVE_MANAGEMENT.CAPTION }}</p>
+    </div>
+
+    <button mat-flat-button color="primary" type="button" (click)="openRequestDialog()">
+      <mat-icon> add </mat-icon>
+
+      New Request
+    </button>
+  </div>
+
+  <div class="balance-grid">
+    <app-progress-card
+      [title]="LEAVE_MANAGEMENT.LEAVE_PROGRESS"
+      [progressbar]="{ remainingValue: usedLeaveDays, totalValue: limits.annualLeaveDays }"
+      [theme]="'#2563eb'"
+      [icon]="'event_available'"
+    />
+
+    <app-progress-card
+      [title]="LEAVE_MANAGEMENT.PERMISSION_PROGRESS"
+      [progressbar]="{ remainingValue: usedPermissionHours, totalValue: limits.monthlyPermissionHours }"
+      [theme]="'#d97706'"
+      [icon]="'schedule'"
+    />
+  </div>
+
+  <div class="quick-actions">
+    <button class="quick-action" type="button" (click)="openLeaveDialog()">
+      <div class="quick-action-icon leave-icon">
+        <mat-icon> event_note </mat-icon>
+      </div>
+
+      <div class="quick-action-content">
+        <strong> Request Leave </strong>
+
+        <span> Sick or casual leave </span>
+      </div>
+
+      <mat-icon class="arrow"> chevron_right </mat-icon>
+    </button>
+
+    <button class="quick-action" type="button" (click)="openPermissionDialog()">
+      <div class="quick-action-icon permission-icon">
+        <mat-icon> schedule </mat-icon>
+      </div>
+
+      <div class="quick-action-content">
+        <strong> Request Permission </strong>
+
+        <span> Maximum 3 hours per month </span>
+      </div>
+
+      <mat-icon class="arrow"> chevron_right </mat-icon>
+    </button>
+  </div>
+</div>

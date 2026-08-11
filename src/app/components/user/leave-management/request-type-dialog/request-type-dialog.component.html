@@ -1,0 +1,45 @@
+<div class="dialog">
+  <div class="dialog-header">
+    <div>
+      <h2>New Request</h2>
+
+      <p>Choose the type of request.</p>
+    </div>
+
+    <button mat-icon-button type="button" (click)="close()">
+      <mat-icon> close </mat-icon>
+    </button>
+  </div>
+
+  <div class="options">
+
+    <button class="option" type="button" (click)="select('leave')">
+      <div class="option-icon leave">
+        <mat-icon> event_available </mat-icon>
+      </div>
+
+      <div class="option-content">
+        <strong> Request Leave </strong>
+
+        <span> Apply for sick or casual leave </span>
+      </div>
+
+      <mat-icon class="arrow"> chevron_right </mat-icon>
+    </button>
+
+
+    <button class="option" type="button" (click)="select('permission')">
+      <div class="option-icon permission">
+        <mat-icon> schedule </mat-icon>
+      </div>
+
+      <div class="option-content">
+        <strong> Request Permission </strong>
+
+        <span> Up to 3 hours per month </span>
+      </div>
+
+      <mat-icon class="arrow"> chevron_right </mat-icon>
+    </button>
+  </div>
+</div>

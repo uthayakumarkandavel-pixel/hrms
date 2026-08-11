@@ -1,1 +1,210 @@
-<p>recognitions works!</p>
+<div class="recognitions-page">
+  <div class="page-header">
+    <div>
+      <h1>Recognitions</h1>
+      <p>Track your achievements and attendance badges.</p>
+    </div>
+  </div>
+
+  <mat-tab-group class="recognition-tabs" animationDuration="0ms">
+    <mat-tab label="Badges">
+      <div class="tab-content">
+        <mat-card class="main-card">
+          <div class="section-header">
+            <div>
+              <h2>Your Attendance Badges</h2>
+              <p>Badges are awarded based on your attendance record.</p>
+            </div>
+
+            <div class="info-box">
+              <mat-icon>verified</mat-icon>
+              <div>
+                <strong>No unplanned absence</strong>
+                <span>Approved leave is not counted.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="badge-grid">
+            <mat-card
+              class="badge-card"
+              *ngFor="let badge of badges"
+              [class.earned]="badge.status === 'Earned'"
+              [class.locked]="badge.status === 'Locked'"
+            >
+              <div class="badge-icon">
+                <mat-icon>{{ badge.icon }}</mat-icon>
+              </div>
+
+              <h3>{{ badge.name }}</h3>
+
+              <mat-chip-set>
+                <mat-chip>{{ badge.duration }}</mat-chip>
+              </mat-chip-set>
+
+              <p>{{ badge.description }}</p>
+
+              <div class="progress-block" *ngIf="badge.progress !== null">
+                <mat-progress-bar mode="determinate" [value]="badge.progress"> </mat-progress-bar>
+
+                <span>{{ badge.current }} / {{ badge.target }} months</span>
+              </div>
+
+              <mat-chip class="status-chip" [class.success]="badge.status === 'Earned'">
+                {{ badge.status }}
+              </mat-chip>
+            </mat-card>
+          </div>
+        </mat-card>
+
+        <div class="bottom-grid">
+          <mat-card class="history-card">
+            <div class="card-heading">
+              <div>
+                <h2>Badge History</h2>
+                <p>Your recently earned recognitions.</p>
+              </div>
+            </div>
+
+            <div class="history-row" *ngFor="let item of history">
+              <div class="history-badge">
+                <mat-icon>{{ item.icon }}</mat-icon>
+              </div>
+
+              <div class="history-name">
+                <strong>{{ item.name }}</strong>
+                <span>{{ item.description }}</span>
+              </div>
+
+              <div class="history-date">
+                <small>Awarded on</small>
+                <strong>{{ item.date }}</strong>
+              </div>
+
+              <mat-chip class="success-chip">Earned</mat-chip>
+            </div>
+          </mat-card>
+
+          <mat-card class="about-card">
+            <h2>About Attendance Badges</h2>
+
+            <div class="about-item">
+              <mat-icon>check_circle</mat-icon>
+              <p>Badges are awarded automatically from your attendance record.</p>
+            </div>
+
+            <div class="about-item">
+              <mat-icon>event_available</mat-icon>
+              <p>Approved leave is not considered unplanned absence.</p>
+            </div>
+
+            <div class="about-item">
+              <mat-icon>emoji_events</mat-icon>
+              <p>Maintain consistent attendance to unlock more badges.</p>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Your Badges">
+      <div class="tab-content">
+        <mat-card class="main-card">
+          <div class="section-header">
+            <div>
+              <h2>Your Attendance Badges</h2>
+              <p>Badges are awarded based on your attendance record.</p>
+            </div>
+
+            <div class="info-box">
+              <mat-icon>verified</mat-icon>
+              <div>
+                <strong>No unplanned absence</strong>
+                <span>Approved leave is not counted.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="badge-grid">
+            <mat-card
+              class="badge-card"
+              *ngFor="let badge of badges"
+              [class.earned]="badge.status === 'Earned'"
+              [class.locked]="badge.status === 'Locked'"
+            >
+              <div class="badge-icon">
+                <mat-icon>{{ badge.icon }}</mat-icon>
+              </div>
+
+              <h3>{{ badge.name }}</h3>
+
+              <mat-chip-set>
+                <mat-chip>{{ badge.duration }}</mat-chip>
+              </mat-chip-set>
+
+              <p>{{ badge.description }}</p>
+
+              <div class="progress-block" *ngIf="badge.progress !== null">
+                <mat-progress-bar mode="determinate" [value]="badge.progress"> </mat-progress-bar>
+
+                <span>{{ badge.current }} / {{ badge.target }} months</span>
+              </div>
+
+              <mat-chip class="status-chip" [class.success]="badge.status === 'Earned'">
+                {{ badge.status }}
+              </mat-chip>
+            </mat-card>
+          </div>
+        </mat-card>
+
+        <div class="bottom-grid">
+          <mat-card class="history-card">
+            <div class="card-heading">
+              <div>
+                <h2>Badge History</h2>
+                <p>Your recently earned recognitions.</p>
+              </div>
+            </div>
+
+            <div class="history-row" *ngFor="let item of history">
+              <div class="history-badge">
+                <mat-icon>{{ item.icon }}</mat-icon>
+              </div>
+
+              <div class="history-name">
+                <strong>{{ item.name }}</strong>
+                <span>{{ item.description }}</span>
+              </div>
+
+              <div class="history-date">
+                <small>Awarded on</small>
+                <strong>{{ item.date }}</strong>
+              </div>
+
+              <mat-chip class="success-chip">Earned</mat-chip>
+            </div>
+          </mat-card>
+
+          <mat-card class="about-card">
+            <h2>About Attendance Badges</h2>
+
+            <div class="about-item">
+              <mat-icon>check_circle</mat-icon>
+              <p>Badges are awarded automatically from your attendance record.</p>
+            </div>
+
+            <div class="about-item">
+              <mat-icon>event_available</mat-icon>
+              <p>Approved leave is not considered unplanned absence.</p>
+            </div>
+
+            <div class="about-item">
+              <mat-icon>emoji_events</mat-icon>
+              <p>Maintain consistent attendance to unlock more badges.</p>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

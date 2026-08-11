@@ -1,11 +1,4 @@
 <div class="sidebar">
-  <div class="sidebar-brand-icon">
-    <img src="/assets/logo.png" alt="Logo" width="70" height="70" />
-    <h2>HRMS site</h2>
-  </div>
-
-  <mat-divider></mat-divider>
-
   <nav class="sidebar-nav">
     @for (item of items; track $index) {
       <a
@@ -22,12 +15,17 @@
   </nav>
 
   <div class="sidebar-footer">
-    <mat-divider></mat-divider>
+    <div class="support-card">
+      <div class="support-icon"><mat-icon>support_agent</mat-icon></div>
+      <div>
+        <strong>Need help?</strong>
+        <span>Contact HR support</span>
+      </div>
+    </div>
 
-    <button mat-button class="nav-item">
-      <mat-icon> help_outline </mat-icon>
-
-      <span> Help &amp; Support </span>
+    <button mat-button class="nav-item footer-item">
+      <mat-icon>help_outline</mat-icon>
+      <span>Help &amp; Support</span>
     </button>
   </div>
 </div>

@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
+  @Output() readonly toggleSidebar = new EventEmitter<void>();
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
 

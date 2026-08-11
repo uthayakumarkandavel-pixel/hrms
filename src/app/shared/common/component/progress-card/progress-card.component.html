@@ -1,0 +1,30 @@
+<div class="balance-grid">
+  <mat-card class="balance-card">
+    <div class="balance-header">
+      <div class="balance-icon leave-icon" [style.color]="theme"  [style.background]="'color-mix(in srgb, ' + theme + ' 15%, white)'">
+        <mat-icon> {{icon}} </mat-icon>
+      </div>
+
+      <div>
+        <span class="balance-title"> {{ title['TITLE'] }} </span>
+
+        <span class="balance-subtitle"> {{ title['CAPTION'] }} </span>
+      </div>
+    </div>
+
+    <div class="balance-value">
+      <strong>
+        {{ progressbar['remainingValue'] }}
+      </strong>
+
+      <span>
+        / {{ progressbar['totalValue'] }}
+        remaining
+      </span>
+    </div>
+
+    <div class="progress-track">
+      <div class="progress-bar leave-progress" [style.width.%]="percentageCalculator" [style.background]="theme"></div>
+    </div>
+  </mat-card>
+</div>

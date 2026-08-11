@@ -1,0 +1,92 @@
+<div class="dialog">
+  <div class="dialog-header">
+    <div>
+      <h2>Request Permission</h2>
+
+      <p>Request permission for a short absence.</p>
+    </div>
+
+    <button mat-icon-button type="button" (click)="cancel()">
+      <mat-icon> close </mat-icon>
+    </button>
+  </div>
+
+  <div class="balance-note">
+    <mat-icon> schedule </mat-icon>
+
+    <span>
+      {{ data.remainingHours }}
+      hour{{ data.remainingHours === 1 ? '' : 's' }}
+      remaining this month
+    </span>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label> Permission Date </mat-label>
+
+      <input matInput [matDatepicker]="datePicker" formControlName="date" />
+
+      <mat-datepicker-toggle matIconSuffix [for]="datePicker" />
+
+      <mat-datepicker #datePicker />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label> Duration </mat-label>
+
+      <mat-select formControlName="hours">
+        <mat-option [value]="0.5"> 30 minutes </mat-option>
+
+        <mat-option [value]="1"> 1 hour </mat-option>
+
+        <mat-option [value]="1.5"> 1 hour 30 minutes </mat-option>
+
+        <mat-option [value]="2"> 2 hours </mat-option>
+
+        <mat-option [value]="2.5"> 2 hours 30 minutes </mat-option>
+
+        <mat-option [value]="3"> 3 hours </mat-option>
+      </mat-select>
+
+      @if (form.controls.hours.hasError('exceedsBalance')) {
+        <mat-error> You don't have enough permission hours remaining. </mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label> Reason </mat-label>
+
+      <textarea
+        matInput
+        rows="3"
+        formControlName="reason"
+        placeholder="Enter the reason for your permission"
+      ></textarea>
+
+      @if (form.controls.reason.hasError('required') && form.controls.reason.touched) {
+        <mat-error> Reason is required. </mat-error>
+      }
+
+      @if (form.controls.reason.hasError('minlength') && form.controls.reason.touched) {
+        <mat-error> Minimum 5 characters required. </mat-error>
+      }
+    </mat-form-field>
+
+    <div class="limit-note">
+      <span> Monthly permission limit </span>
+
+      <strong> 3 hours </strong>
+    </div>
+
+    <div class="dialog-actions">
+      <button mat-button type="button" (click)="cancel()">Cancel</button>
+
+      <button mat-flat-button color="primary" type="submit">
+        <mat-icon> send </mat-icon>
+
+        Submit Request
+      </button>
+    </div>
+  </form>
+</div>

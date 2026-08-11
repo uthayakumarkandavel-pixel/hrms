@@ -1,24 +1,43 @@
 .app-shell {
   width: 100%;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
-  background: #f5f7fb;
-  color: #172033;
+  background: var(--background);
+}
+
+.app-header {
+  flex: 0 0 68px;
+  width: 100%;
+  height: 68px;
+  background: rgba(255, 255, 255, .96);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  z-index: 20;
 }
 
 .app-container {
+  flex: 1 1 auto;
   width: 100%;
-  height: 100%;
-  background: #f5f7fb;
+  min-height: 0;
+  background: var(--background);
 }
 
 .app-sidebar {
   width: 248px;
   min-width: 248px;
-  box-sizing: border-box;
-  border-right: 1px solid #e6eaf0;
+  transition: width .2s ease, min-width .2s ease;
+  border-right: 1px solid var(--border);
+  background: var(--surface);
   border-radius: 0;
-  background: #ffffff;
+  box-shadow: 2px 0 12px rgba(16, 24, 40, .025);
+}
+
+.app-sidebar.sidebar-collapsed {
+  width: 72px;
+  min-width: 72px;
+  border-right: 1px solid var(--border);
 }
 
 .app-content {
@@ -26,76 +45,24 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  background: #f5f7fb;
+  background: var(--background);
   overflow: hidden;
-}
-
-.app-header {
-  flex: 0 0 64px;
-  width: 100%;
-  height: 64px;
-  box-sizing: border-box;
-  background: #ffffff;
-  border-bottom: 1px solid #e6eaf0;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
-  position: relative;
-  z-index: 10;
 }
 
 .app-main {
   flex: 1;
   min-height: 0;
   width: 100%;
-  box-sizing: border-box;
-  padding: 28px;
   overflow: auto;
 }
 
-.content-card {
-  width: 100%;
-  max-width: 1400px;
-  min-height: 100%;
-  margin: 0 auto;
-  box-sizing: border-box;
-  padding: 28px;
-  border: 1px solid #e6eaf0;
-  border-radius: 14px;
-  background: #ffffff;
-  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
-}
-
-@media (max-width: 900px) {
+@media (max-width: 760px) {
   .app-sidebar {
     width: 220px;
     min-width: 220px;
   }
 
   .app-main {
-    padding: 20px;
-  }
-
-  .content-card {
-    padding: 22px;
-  }
-}
-
-@media (max-width: 640px) {
-  .app-sidebar {
-    width: 200px;
-    min-width: 200px;
-  }
-
-  .app-header {
-    flex-basis: 60px;
-    height: 60px;
-  }
-
-  .app-main {
-    padding: 14px;
-  }
-
-  .content-card {
-    padding: 18px;
-    border-radius: 10px;
+    padding: 20px 16px;
   }
 }

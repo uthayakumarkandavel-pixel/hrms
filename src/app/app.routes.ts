@@ -15,6 +15,8 @@ import { NotFoundComponent } from './shared/common/component/not-found/not-found
 import { AttendenceComponent } from './components/user/attendence/attendence.component';
 import { HolidayComponent } from './components/user/holiday/holiday.component';
 import { RecognitionsComponent } from './components/user/recognitions/recognitions.component';
+import { HomeUserComponent } from './components/user/home/home.component';
+import { LeaveManagementUserComponent } from './components/user/leave-management/leave-management.component';
 
 export const routes: Routes = [
   {
@@ -30,6 +32,11 @@ export const routes: Routes = [
         path: 'forgot-password',
         component: ForgotPasswordComponent,
       },
+      {
+        path:'',
+        redirectTo:'/login',
+        pathMatch:'full'
+      }
     ],
   },
 
@@ -46,6 +53,11 @@ export const routes: Routes = [
         path: 'leave-management',
         component: LeaveManagementComponent,
       },
+      {
+        path:'',
+        redirectTo:'/home',
+        pathMatch:'full'
+      }
     ],
   },
 
@@ -56,7 +68,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'home',
-        component: HomeComponent,
+        component: HomeUserComponent,
       },
       {
         path: 'attendance',
@@ -68,12 +80,17 @@ export const routes: Routes = [
       },
       {
         path: 'leave-management',
-        component: LeaveManagementComponent,
+        component: LeaveManagementUserComponent,
       },
       {
         path: 'recognitions',
         component: RecognitionsComponent,
       },
+      {
+        path:'',
+        redirectTo:'/home',
+        pathMatch:'full'
+      }
     ],
   },
 

@@ -1,24 +1,16 @@
 <div class="app-shell">
+  <header class="app-header">
+    <app-header (toggleSidebar)="toggleSidebar()"></app-header>
+  </header>
+
   <mat-sidenav-container class="app-container">
-    <mat-sidenav
-      #sidenav
-      class="app-sidebar"
-      mode="side"
-      opened
-      [fixedInViewport]="false"
-    >
+    <mat-sidenav #sidenav class="app-sidebar" mode="side" [opened]="sidebarOpen" [class.sidebar-collapsed]="!sidebarOpen" [fixedInViewport]="false">
       <app-sidebar></app-sidebar>
     </mat-sidenav>
 
     <mat-sidenav-content class="app-content">
-      <header class="app-header">
-        <app-header></app-header>
-      </header>
-
       <main class="app-main">
-        <section class="content-card">
-          <router-outlet></router-outlet>
-        </section>
+        <router-outlet></router-outlet>
       </main>
     </mat-sidenav-content>
   </mat-sidenav-container>
