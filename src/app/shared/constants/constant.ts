@@ -133,8 +133,8 @@ export const CONSTANTS = {
       monthlyPermissionHours: 3,
       casualLeaveAdvanceMonths: 1,
     },
-    LEAVE_PROGRESS: {TITLE:'Annual Leave',CAPTION:'2026'},
-    PERMISSION_PROGRESS: {TITLE:'Monthly Permissions',CAPTION:'2026'},
+    LEAVE_PROGRESS: {TITLE:'Leaves',CAPTION:'2026'},
+    PERMISSION_PROGRESS: {TITLE:'Permissions',CAPTION:'2026'},
 
   },
 };

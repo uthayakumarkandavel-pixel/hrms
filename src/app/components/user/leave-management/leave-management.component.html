@@ -1,9 +1,9 @@
 <div class="leave-page">
   <div class="page-header">
     <div>
-      <h1>{{ LEAVE_MANAGEMENT.TITLE }}</h1>
+      <h1>{{ leaveManagement.TITLE }}</h1>
 
-      <p>{{ LEAVE_MANAGEMENT.CAPTION }}</p>
+      <p>{{ leaveManagement.CAPTION }}</p>
     </div>
 
     <button mat-flat-button color="primary" type="button" (click)="openRequestDialog()">
@@ -15,15 +15,15 @@
 
   <div class="balance-grid">
     <app-progress-card
-      [title]="LEAVE_MANAGEMENT.LEAVE_PROGRESS"
-      [progressbar]="{ remainingValue: usedLeaveDays, totalValue: limits.annualLeaveDays }"
+      [title]="leaveManagement.LEAVE_PROGRESS"
+      [progressbar]="{ usedValue: usedLeaveDays(), totalValue: limits.annualLeaveDays }"
       [theme]="'#2563eb'"
       [icon]="'event_available'"
     />
 
     <app-progress-card
-      [title]="LEAVE_MANAGEMENT.PERMISSION_PROGRESS"
-      [progressbar]="{ remainingValue: usedPermissionHours, totalValue: limits.monthlyPermissionHours }"
+      [title]="leaveManagement.PERMISSION_PROGRESS"
+      [progressbar]="{ usedValue: usedPermissionHours(), totalValue: limits.monthlyPermissionHours }"
       [theme]="'#d97706'"
       [icon]="'schedule'"
     />

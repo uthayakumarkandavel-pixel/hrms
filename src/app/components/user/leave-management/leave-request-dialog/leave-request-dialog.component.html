@@ -7,99 +7,173 @@
     </div>
 
     <button mat-icon-button type="button" (click)="cancel()">
-      <mat-icon> close </mat-icon>
+      <mat-icon>close</mat-icon>
     </button>
   </div>
-
-  <div class="balance-note">
-    <mat-icon> event_available </mat-icon>
-
-    <span>
-      {{ data.remainingDays }}
-      day{{ data.remainingDays === 1 ? '' : 's' }}
-      remaining this year
-    </span>
-  </div>
-
-  <form [formGroup]="form" (ngSubmit)="submit()">
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label> Leave Type </mat-label>
-
-      <mat-select formControlName="type">
-        <mat-option value="Sick Leave"> Sick Leave </mat-option>
-
-        <mat-option value="Casual Leave"> Casual Leave </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <div class="date-grid">
-      <mat-form-field appearance="outline">
-        <mat-label> From </mat-label>
-
-        <input matInput [matDatepicker]="fromPicker" formControlName="from" [min]="today" />
-        <mat-datepicker-toggle matIconSuffix [for]="fromPicker"></mat-datepicker-toggle>
-
-        <mat-datepicker #fromPicker></mat-datepicker>
-
-        @if (form.controls.from.hasError('advanceRequired')) {
-          <mat-error> Casual leave requires 1 month notice. </mat-error>
-        }
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label> To </mat-label>
-
-        <input matInput [matDatepicker]="toPicker" formControlName="to"  [min]="form.get('from')?.value??today" />
-
-        <mat-datepicker-toggle matIconSuffix [for]="toPicker" />
-
-        <mat-datepicker #toPicker />
-
-        @if (form.controls.to.hasError('invalidRange')) {
-          <mat-error> End date must be after start date. </mat-error>
-        }
-
-        @if (form.controls.to.hasError('exceedsBalance')) {
-          <mat-error> Leave balance exceeded. </mat-error>
-        }
-      </mat-form-field>
-    </div>
-
-    @if (isCasualLeave) {
-      <div class="info-box">
-        <mat-icon> info </mat-icon>
-
-        <span> Casual Leave must be applied at least 1 month before the leave date. </span>
+  @if (!hasLeaveBalance) {
+    <div class="empty-state">
+      <div class="empty-icon">
+        <mat-icon>event_busy</mat-icon>
       </div>
-    }
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label> Reason </mat-label>
+      <h3>No Leave Balance</h3>
 
-      <textarea
-        matInput
-        rows="3"
-        formControlName="reason"
-        placeholder="Enter the reason for your leave"
-      ></textarea>
+      <p>You have used all {{ 10 }} leave days available for this year.</p>
 
-      @if (form.controls.reason.hasError('required') && form.controls.reason.touched) {
-        <mat-error> Reason is required. </mat-error>
-      }
-
-      @if (form.controls.reason.hasError('minlength') && form.controls.reason.touched) {
-        <mat-error> Minimum 5 characters required. </mat-error>
-      }
-    </mat-form-field>
-
-    <div class="dialog-actions">
-      <button mat-button type="button" (click)="cancel()">Cancel</button>
-
-      <button mat-flat-button color="primary" type="submit">
-        <mat-icon> send </mat-icon>
-
-        Submit Request
-      </button>
+      <button mat-stroked-button type="button" (click)="cancel()">Close</button>
     </div>
-  </form>
+  }
+
+  @if (hasLeaveBalance) {
+    <div class="balance-note">
+      <mat-icon> event_available </mat-icon>
+
+      <span>
+        <strong>
+          {{ data.remainingDays }}
+        </strong>
+        day{{ data.remainingDays === 1 ? '' : 's' }}
+        remaining this year
+      </span>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label> Leave Type </mat-label>
+
+        <mat-select formControlName="type">
+          <mat-option value="Sick Leave"> Sick Leave </mat-option>
+
+          <mat-option value="Casual Leave"> Casual Leave </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="date-grid">
+        <mat-form-field appearance="outline">
+          <mat-label> From </mat-label>
+
+          <input
+            matInput
+            [matDatepicker]="fromPicker"
+            [min]="minimumFromDate"
+            formControlName="from"
+          />
+
+          <mat-datepicker-toggle matIconSuffix [for]="fromPicker" />
+
+          <mat-datepicker #fromPicker />
+
+          @if (form.controls.from.hasError('required') && form.controls.from.touched) {
+            <mat-error> Start date is required. </mat-error>
+          }
+
+          @if (form.controls.from.hasError('invalidStartDate')) {
+            <mat-error>
+              @if (isCasualLeave) {
+                Casual leave requires one month advance notice.
+              } @else {
+                Leave cannot be requested for a past date.
+              }
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label> To </mat-label>
+
+          <input
+            matInput
+            [matDatepicker]="toPicker"
+            [min]="form.controls.from.value || minimumFromDate"
+            [max]="maximumToDate"
+            formControlName="to"
+          />
+
+          <mat-datepicker-toggle matIconSuffix [for]="toPicker" />
+
+          <mat-datepicker #toPicker />
+
+          @if (form.controls.to.hasError('required') && form.controls.to.touched) {
+            <mat-error> End date is required. </mat-error>
+          }
+
+          @if (form.controls.to.hasError('invalidRange')) {
+            <mat-error> End date must be after start date. </mat-error>
+          }
+
+          @if (form.controls.to.hasError('exceedsBalance')) {
+            <mat-error>
+              You can select a maximum of
+              {{ data.remainingDays }}
+              day{{ data.remainingDays === 1 ? '' : 's' }}.
+            </mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      @if (isCasualLeave) {
+        <div class="info-box">
+          <mat-icon> info </mat-icon>
+
+          <div>
+            <strong> Casual Leave </strong>
+
+            <span>
+              Dates within the next month are disabled. You can apply from
+              {{ minimumCasualDate | date: 'dd MMM yyyy' }}
+              onward.
+            </span>
+          </div>
+        </div>
+      }
+
+      @if (form.controls.from.value) {
+        <div class="limit-info">
+          <mat-icon> date_range </mat-icon>
+
+          <span>
+            You can select up to
+            <strong>
+              {{ data.remainingDays }}
+            </strong>
+            consecutive day{{ data.remainingDays === 1 ? '' : 's' }}
+            from your selected start date.
+          </span>
+        </div>
+      }
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label> Reason </mat-label>
+
+        <textarea
+          matInput
+          rows="3"
+          maxlength="250"
+          formControlName="reason"
+          placeholder="Enter the reason for your leave"
+        ></textarea>
+
+        @if (form.controls.reason.hasError('required') && form.controls.reason.touched) {
+          <mat-error> Reason is required. </mat-error>
+        }
+
+        @if (form.controls.reason.hasError('minlength') && form.controls.reason.touched) {
+          <mat-error> Minimum 5 characters required. </mat-error>
+        }
+
+        @if (form.controls.reason.hasError('maxlength')) {
+          <mat-error> Maximum 250 characters allowed. </mat-error>
+        }
+      </mat-form-field>
+      <div class="dialog-actions">
+        <button mat-button type="button" (click)="cancel()">Cancel</button>
+
+        <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">
+          <mat-icon> send </mat-icon>
+
+          Submit Request
+        </button>
+      </div>
+    </form>
+  }
 </div>

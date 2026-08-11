@@ -10,83 +10,133 @@
       <mat-icon> close </mat-icon>
     </button>
   </div>
+  @if (!hasPermissionBalance) {
+    <div class="empty-state">
+      <div class="empty-icon">
+        <mat-icon> schedule </mat-icon>
+      </div>
 
-  <div class="balance-note">
-    <mat-icon> schedule </mat-icon>
+      <h3>No Permission Balance</h3>
 
-    <span>
-      {{ data.remainingHours }}
-      hour{{ data.remainingHours === 1 ? '' : 's' }}
-      remaining this month
-    </span>
-  </div>
+      <p>You have used all 3 permission hours available for this month.</p>
 
-  <form [formGroup]="form" (ngSubmit)="submit()">
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label> Permission Date </mat-label>
+      <button mat-stroked-button type="button" (click)="cancel()">Close</button>
+    </div>
+  }
 
-      <input matInput [matDatepicker]="datePicker" formControlName="date" />
+  @if (hasPermissionBalance) {
+    <div class="balance-note">
+      <mat-icon> schedule </mat-icon>
 
-      <mat-datepicker-toggle matIconSuffix [for]="datePicker" />
+      <span>
+        <strong>
+          {{ data.remainingHours }}
+        </strong>
 
-      <mat-datepicker #datePicker />
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label> Duration </mat-label>
-
-      <mat-select formControlName="hours">
-        <mat-option [value]="0.5"> 30 minutes </mat-option>
-
-        <mat-option [value]="1"> 1 hour </mat-option>
-
-        <mat-option [value]="1.5"> 1 hour 30 minutes </mat-option>
-
-        <mat-option [value]="2"> 2 hours </mat-option>
-
-        <mat-option [value]="2.5"> 2 hours 30 minutes </mat-option>
-
-        <mat-option [value]="3"> 3 hours </mat-option>
-      </mat-select>
-
-      @if (form.controls.hours.hasError('exceedsBalance')) {
-        <mat-error> You don't have enough permission hours remaining. </mat-error>
-      }
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label> Reason </mat-label>
-
-      <textarea
-        matInput
-        rows="3"
-        formControlName="reason"
-        placeholder="Enter the reason for your permission"
-      ></textarea>
-
-      @if (form.controls.reason.hasError('required') && form.controls.reason.touched) {
-        <mat-error> Reason is required. </mat-error>
-      }
-
-      @if (form.controls.reason.hasError('minlength') && form.controls.reason.touched) {
-        <mat-error> Minimum 5 characters required. </mat-error>
-      }
-    </mat-form-field>
-
-    <div class="limit-note">
-      <span> Monthly permission limit </span>
-
-      <strong> 3 hours </strong>
+        hour{{ data.remainingHours === 1 ? '' : 's' }}
+        remaining this month
+      </span>
     </div>
 
-    <div class="dialog-actions">
-      <button mat-button type="button" (click)="cancel()">Cancel</button>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label> Permission Date </mat-label>
 
-      <button mat-flat-button color="primary" type="submit">
-        <mat-icon> send </mat-icon>
+        <input matInput [matDatepicker]="datePicker" [min]="today" formControlName="date" />
 
-        Submit Request
-      </button>
-    </div>
-  </form>
+        <mat-datepicker-toggle matIconSuffix [for]="datePicker" />
+
+        <mat-datepicker #datePicker />
+
+        @if (form.controls.date.hasError('required') && form.controls.date.touched) {
+          <mat-error> Permission date is required. </mat-error>
+        }
+
+        @if (form.controls.date.hasError('pastDate')) {
+          <mat-error> Permission cannot be requested for a past date. </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label> Duration </mat-label>
+
+        <mat-select formControlName="hours">
+          @for (hours of availablePermissionOptions; track hours) {
+            <mat-option [value]="hours">
+              {{ hours }}
+              hour{{ hours === 1 ? '' : 's' }}
+            </mat-option>
+          }
+        </mat-select>
+
+        <mat-hint>
+          Maximum remaining:
+          {{ data.remainingHours }} hours
+        </mat-hint>
+
+        @if (form.controls.hours.hasError('required') && form.controls.hours.touched) {
+          <mat-error> Duration is required. </mat-error>
+        }
+
+        @if (form.controls.hours.hasError('min')) {
+          <mat-error> Minimum permission is 30 minutes. </mat-error>
+        }
+
+        @if (form.controls.hours.hasError('max')) {
+          <mat-error> Maximum permission is 3 hours. </mat-error>
+        }
+
+        @if (form.controls.hours.hasError('exceedsBalance')) {
+          <mat-error>
+            You only have
+            {{ data.remainingHours }}
+            hours remaining this month.
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <div class="limit-info">
+        <mat-icon> info </mat-icon>
+
+        <span>
+          Monthly permission limit:
+          <strong>3 hours</strong>
+        </span>
+      </div>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label> Reason </mat-label>
+
+        <textarea
+          matInput
+          rows="3"
+          maxlength="250"
+          formControlName="reason"
+          placeholder="Enter the reason for your permission"
+        ></textarea>
+
+        @if (form.controls.reason.hasError('required') && form.controls.reason.touched) {
+          <mat-error> Reason is required. </mat-error>
+        }
+
+        @if (form.controls.reason.hasError('minlength') && form.controls.reason.touched) {
+          <mat-error> Minimum 5 characters required. </mat-error>
+        }
+
+        @if (form.controls.reason.hasError('maxlength')) {
+          <mat-error> Maximum 250 characters allowed. </mat-error>
+        }
+      </mat-form-field>
+
+      <div class="dialog-actions">
+        <button mat-button type="button" (click)="cancel()">Cancel</button>
+
+        <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">
+          <mat-icon> send </mat-icon>
+
+          Submit Request
+        </button>
+      </div>
+    </form>
+  }
 </div>
