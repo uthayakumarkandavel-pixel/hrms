@@ -121,37 +121,3 @@
 .footer-item {
   color: var(--muted);
 }
-
-:host-context(.sidebar-collapsed) .sidebar-nav {
-  padding: 6px 10px;
-  align-items: center;
-}
-
-:host-context(.sidebar-collapsed) .nav-item {
-  width: 48px;
-  justify-content: center;
-  gap: 0;
-  padding: 0;
-}
-
-:host-context(.sidebar-collapsed) .nav-item span,
-:host-context(.sidebar-collapsed) .support-card > div:not(.support-icon) {
-  display: none;
-}
-
-:host-context(.sidebar-collapsed) .sidebar-footer {
-  padding: 12px 10px;
-}
-
-:host-context(.sidebar-collapsed) .support-card {
-  width: 48px;
-  height: 44px;
-  justify-content: center;
-  padding: 0;
-  margin: 0 auto 8px;
-}
-
-:host-context(.sidebar-collapsed) .support-icon {
-  width: 34px;
-  height: 34px;
-}

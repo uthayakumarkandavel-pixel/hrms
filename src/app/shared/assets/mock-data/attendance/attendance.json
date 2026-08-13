@@ -1,0 +1,20 @@
+[
+  {
+    "date": "2026-08-10",
+    "status": "Present",
+    "checkIn": "09:12",
+    "checkOut": "18:05"
+  },
+  {
+    "date": "2026-08-11",
+    "status": "Present",
+    "checkIn": "09:04",
+    "checkOut": "18:12"
+  },
+  {
+    "date": "2026-08-12",
+    "status": "Present",
+    "checkIn": "09:20",
+    "checkOut": "18:00"
+  }
+]

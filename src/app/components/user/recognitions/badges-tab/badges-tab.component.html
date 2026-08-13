@@ -1,6 +1,6 @@
 <div class="tab-content">
   <section class="badge-grid">
-    @for (badge of badges; track badge.name) {
+    @for (badge of badges(); track badge.name) {
       <mat-card class="badge-card" [class.locked]="badge.status === 'Locked'">
         <div class="badge-card-top">
           <div class="badge-icon">

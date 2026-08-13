@@ -11,7 +11,7 @@
     </button>
     <div class="header-brand">
       <div class="header-brand-mark">
-        <img src="/assets/logo.png" [alt]="app.NAME" />
+        <img src="/assets/images/logo.png" [alt]="app.NAME" />
       </div>
       <div class="header-brand-copy">
         <strong>{{ app.NAME }}</strong>
@@ -25,7 +25,11 @@
       <mat-icon>search</mat-icon>
     </button>
 
-    <button mat-icon-button class="header-action notification" [attr.aria-label]="text.NOTIFICATIONS">
+    <button
+      mat-icon-button
+      class="header-action notification"
+      [attr.aria-label]="text.NOTIFICATIONS"
+    >
       <mat-icon>notifications_none</mat-icon>
       <span class="notification-badge">3</span>
     </button>

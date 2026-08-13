@@ -1,29 +1,32 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { CONSTANTS } from '../../../../shared/constants/constant';
-
-type Badge = (typeof CONSTANTS.BADGES.CATALOG)[number];
-type BadgeHistory = (typeof CONSTANTS.BADGES.HISTORY)[number];
+import { RecognitionService } from '../../../../services/recognition/recognition.service';
 
 @Component({
   selector: 'app-your-badges-tab',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatIconModule,
-  ],
+  imports: [CommonModule, MatCardModule, MatIconModule],
   templateUrl: './your-badges-tab.component.html',
   styleUrls: ['./your-badges-tab.component.scss'],
 })
 export class YourBadgesTabComponent {
-  BADGES = CONSTANTS.BADGES;
-  badges: readonly Badge[] = CONSTANTS.BADGES.CATALOG;
-  history: readonly BadgeHistory[] = CONSTANTS.BADGES.HISTORY;
+  readonly BADGES = CONSTANTS.BADGES;
 
-  get earnedCount(): number {
-    return this.badges.filter((badge) => badge.status === 'Earned').length;
-  }
+  private readonly service = inject(RecognitionService);
+
+  readonly badges = toSignal(this.service.getBadges(), {
+    initialValue: [],
+  });
+
+  readonly history = toSignal(this.service.getBadgeHistory(), {
+    initialValue: [],
+  });
+
+  readonly earnedCount = computed(
+    () => this.badges().filter((badge) => badge.status === 'Earned').length,
+  );
 }

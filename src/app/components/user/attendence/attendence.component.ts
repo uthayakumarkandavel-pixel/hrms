@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { AttendanceService } from '../../../services/attendance/attendance.service';
 
 @Component({
   selector: 'app-attendence',
@@ -6,4 +8,10 @@ import { Component } from '@angular/core';
   templateUrl: './attendence.component.html',
   styleUrl: './attendence.component.scss',
 })
-export class AttendenceComponent {}
+export class AttendenceComponent {
+  private readonly service = inject(AttendanceService);
+
+  readonly attendance = toSignal(this.service.getAttendance(), {
+    initialValue: [],
+  });
+}

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, DestroyRef, inject } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, effect, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import {
   AbstractControl,
   FormBuilder,
@@ -17,8 +17,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { LeaveRequestResult, LeaveType } from '../../../../shared/types/leave-management';
 import { CONSTANTS } from '../../../../shared/constants/constant';
+import { LeaveType } from '../../../../shared/types/leave.types';
+import { LeaveRequestResult } from '../../../../shared/types/leave-management.types';
 
 export interface LeaveDialogData {
   remainingDays: number;
@@ -50,7 +51,6 @@ export class LeaveRequestDialogComponent {
 
   private readonly dialogRef = inject(MatDialogRef<LeaveRequestDialogComponent>);
 
-  private readonly destroyRef = inject(DestroyRef);
 
   readonly data = inject<LeaveDialogData>(MAT_DIALOG_DATA);
 
@@ -70,25 +70,34 @@ export class LeaveRequestDialogComponent {
     ]),
   });
 
-  constructor() {
-    // No leave remaining.
+  private readonly selectedType = toSignal(
+    this.form.controls.type.valueChanges,
+    { initialValue: this.form.controls.type.value },
+  );
+
+  private readonly selectedFrom = toSignal(
+    this.form.controls.from.valueChanges,
+    { initialValue: this.form.controls.from.value },
+  );
+
+  private readonly formEffects = effect(() => {
+    this.selectedType();
+    this.form.controls.from.reset();
+    this.form.controls.to.reset();
+  });
+
+  private readonly balanceEffect = effect(() => {
     if (this.data.remainingDays <= 0) {
       this.form.disable();
     }
+  });
 
-    // Leave type changed.
-    this.form.controls.type.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-      this.form.controls.from.reset();
-      this.form.controls.to.reset();
-    });
+  private readonly fromEffect = effect(() => {
+    this.selectedFrom();
+    this.form.controls.to.reset();
+    this.updateToDateValidator();
+  });
 
-    // Start date changed.
-    this.form.controls.from.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-      this.form.controls.to.reset();
-
-      this.updateToDateValidator();
-    });
-  }
 
   get hasLeaveBalance(): boolean {
     return this.data.remainingDays > 0;

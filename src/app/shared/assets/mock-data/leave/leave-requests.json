@@ -1,0 +1,22 @@
+[
+  {
+    "id": "LR-001",
+    "userId": "user-001",
+    "type": "Sick Leave",
+    "from": "2026-03-10",
+    "to": "2026-03-11",
+    "days": 2,
+    "reason": "Fever and rest",
+    "status": "Approved"
+  },
+  {
+    "id": "LR-002",
+    "userId": "user-001",
+    "type": "Casual Leave",
+    "from": "2026-05-18",
+    "to": "2026-05-19",
+    "days": 2,
+    "reason": "Personal work",
+    "status": "Pending"
+  }
+]

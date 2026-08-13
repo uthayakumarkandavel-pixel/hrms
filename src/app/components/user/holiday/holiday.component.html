@@ -6,12 +6,12 @@
         <p>{{ text.CALENDAR_CAPTION }}</p>
       </div>
       <mat-chip>
-        {{ holidays.length }} {{ text.HOLIDAYS_SUFFIX }}
+        {{ holidays().length }} {{ text.HOLIDAYS_SUFFIX }}
       </mat-chip>
     </div>
 
     <div class="holiday-grid">
-      @for (holiday of holidays; track holiday.date) {
+      @for (holiday of holidays(); track holiday.date) {
         <article class="holiday-tile">
           <div class="date-box" aria-hidden="true">
             <span class="month">

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, DestroyRef, inject } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, effect, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -14,8 +14,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
-import { PermissionRequestResult } from '../../../../shared/types/leave-management';
 import { CONSTANTS } from '../../../../shared/constants/constant';
+import { PermissionRequestResult } from '../../../../shared/types/leave-management.types';
 
 export interface PermissionDialogData {
   remainingHours: number;
@@ -48,7 +48,6 @@ export class PermissionRequestDialogComponent {
 
   private readonly dialogRef = inject(MatDialogRef<PermissionRequestDialogComponent>);
 
-  private readonly destroyRef = inject(DestroyRef);
 
   readonly data = inject<PermissionDialogData>(MAT_DIALOG_DATA);
 
@@ -72,16 +71,25 @@ export class PermissionRequestDialogComponent {
     ]),
   });
 
-  constructor() {
+  private readonly selectedHours = toSignal(
+    this.form.controls.hours.valueChanges,
+    { initialValue: this.form.controls.hours.value },
+  );
+
+  private readonly hoursEffect = effect(() => {
+    const value = this.selectedHours();
+
+    if (value !== null && value > this.data.remainingHours) {
+      this.form.controls.hours.reset();
+    }
+  });
+
+  private readonly balanceEffect = effect(() => {
     if (this.data.remainingHours <= 0) {
       this.form.disable();
     }
-    this.form.controls.hours.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value) => {
-      if (value !== null && value > this.data.remainingHours) {
-        this.form.controls.hours.reset();
-      }
-    });
-  }
+  });
+
 
   get hasPermissionBalance(): boolean {
     return this.data.remainingHours > 0;

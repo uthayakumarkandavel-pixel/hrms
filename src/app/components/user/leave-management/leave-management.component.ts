@@ -1,19 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject, signal, WritableSignal } from '@angular/core';
-
+import { Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import {
-  LeaveRequest,
-  PermissionRequest,
-  RequestStatus,
-} from '../../../shared/types/leave-management';
 import { CONSTANTS } from '../../../shared/constants/constant';
-import { RequestTypeDialogComponent } from './request-type-dialog/request-type-dialog.component';
+import { ProgressCardComponent } from '../../../shared/common/component/progress-card/progress-card.component';
+import { LeaveService } from '../../../services/leave/leave.service';
+import { PermissionService } from '../../../services/permission/permission.service';
 import { LeaveRequestDialogComponent } from './leave-request-dialog/leave-request-dialog.component';
 import { PermissionRequestDialogComponent } from './permission-request-dialog/permission-request-dialog.component';
-import { ProgressCardComponent } from '../../../shared/common/component/progress-card/progress-card.component';
 
 @Component({
   selector: 'app-leave-management',
@@ -24,116 +20,91 @@ import { ProgressCardComponent } from '../../../shared/common/component/progress
 })
 export class LeaveManagementUserComponent {
   private readonly dialog = inject(MatDialog);
+  private readonly leaveService = inject(LeaveService);
+  private readonly permissionService = inject(PermissionService);
 
-  leaveManagement = CONSTANTS.LEAVE_MANAGEMENT;
-  leave = CONSTANTS.LEAVE;
+  readonly leaveManagement = CONSTANTS.LEAVE_MANAGEMENT;
+  readonly leave = CONSTANTS.LEAVE;
 
-  readonly limits = this.leaveManagement.LEAVE_LIMITS;
-
-  readonly leaveRequests = signal<LeaveRequest[]>([
-    {
-      type: 'Sick Leave',
-      from: new Date(2026, 2, 10),
-      to: new Date(2026, 2, 11),
-      days: 2,
-      reason: 'Fever and rest',
-      status: 'Approved',
+  readonly limits = toSignal(this.leaveService.getLeaveLimits(), {
+    initialValue: {
+      annualLeaveDays: 0,
+      monthlyPermissionHours: 0,
+      casualLeaveAdvanceMonths: 1,
     },
-    {
-      type: 'Casual Leave',
-      from: new Date(2026, 4, 18),
-      to: new Date(2026, 4, 19),
-      days: 2,
-      reason: 'Personal work',
-      status: 'Pending',
-    },
-  ]);
+  });
 
-  readonly permissionRequests = signal<PermissionRequest[]>([
-    {
-      date: new Date(2026, 7, 5),
-      hours: 1.5,
-      reason: 'Personal appointment',
-      status: 'Approved',
-    },
-  ]);
+  readonly leaveRequests = toSignal(this.leaveService.getLeaveRequests('user-001'), {
+    initialValue: [],
+  });
 
-  readonly usedLeaveDays = computed(() =>
-    this.leaveRequests().reduce((total, request) => total + request.days, 0),
-  );
+  readonly permissionRequests = toSignal(this.permissionService.getPermissionRequests('user-001'), {
+    initialValue: [],
+  });
 
-  readonly usedPermissionHours = computed(() =>
-    this.permissionRequests().reduce((total, request) => total + request.hours, 0),
-  );
+  get usedLeaveDays(): number {
+    return this.leaveRequests().reduce((total, request) => total + request.days, 0);
+  }
 
-  readonly remainingLeaveDays = computed(() =>
-    Math.max(this.limits.annualLeaveDays - this.usedLeaveDays(), 0),
-  );
+  get usedPermissionHours(): number {
+    return this.permissionRequests().reduce((total, request) => total + request.hours, 0);
+  }
 
-  readonly remainingPermissionHours = computed(() =>
-    Math.max(this.limits.monthlyPermissionHours - this.usedPermissionHours(), 0),
-  );
+  get remainingLeaveDays(): number {
+    return Math.max(this.limits().annualLeaveDays - this.usedLeaveDays, 0);
+  }
 
-  openRequestDialog(): void {
-    const dialogRef = this.dialog.open(RequestTypeDialogComponent, {
-      width: '420px',
-      maxWidth: 'calc(100vw - 32px)',
-      autoFocus: false,
-    });
-
-    dialogRef.afterClosed().subscribe((type) => {
-      if (type === 'leave') {
-        this.openLeaveDialog();
-      }
-
-      if (type === 'permission') {
-        this.openPermissionDialog();
-      }
-    });
+  get remainingPermissionHours(): number {
+    return Math.max(this.limits().monthlyPermissionHours - this.usedPermissionHours, 0);
   }
 
   openLeaveDialog(): void {
-    const dialogRef = this.dialog.open(LeaveRequestDialogComponent, {
+    const ref = this.dialog.open(LeaveRequestDialogComponent, {
       width: '560px',
       maxWidth: 'calc(100vw - 32px)',
       autoFocus: false,
       data: {
-        remainingDays: this.remainingLeaveDays(),
+        remainingDays: this.remainingLeaveDays,
       },
     });
 
-    dialogRef.afterClosed().subscribe((request) => {
-      if (!request) {
-        return;
-      }
+    ref.afterClosed().subscribe((result) => {
+      if (!result) return;
 
-      this.appendRequest(this.leaveRequests, request);
+      this.leaveService
+        .createLeaveRequest({
+          userId: 'user-001',
+          type: result.type,
+          from: result.from.toISOString().slice(0, 10),
+          to: result.to.toISOString().slice(0, 10),
+          days: result.days,
+          reason: result.reason,
+        })
+        .subscribe();
     });
   }
 
   openPermissionDialog(): void {
-    const dialogRef = this.dialog.open(PermissionRequestDialogComponent, {
+    const ref = this.dialog.open(PermissionRequestDialogComponent, {
       width: '500px',
       maxWidth: 'calc(100vw - 32px)',
       autoFocus: false,
       data: {
-        remainingHours: this.remainingPermissionHours(),
+        remainingHours: this.remainingPermissionHours,
       },
     });
 
-    dialogRef.afterClosed().subscribe((request) => {
-      if (!request) {
-        return;
-      }
+    ref.afterClosed().subscribe((result) => {
+      if (!result) return;
 
-      this.appendRequest(this.permissionRequests, request);
+      this.permissionService
+        .createPermissionRequest({
+          userId: 'user-001',
+          date: result.date.toISOString().slice(0, 10),
+          hours: result.hours,
+          reason: result.reason,
+        })
+        .subscribe();
     });
-  }
-
-  private appendRequest<T extends { status: RequestStatus }>(
-    store: WritableSignal<T[]>,
-    request: T,
-  ): void {
-    store.update((requests) => [{ ...request, status: 'Pending' }, ...requests]);
   }
 }

@@ -8,7 +8,7 @@
     </div>
 
     <div class="history-list">
-      @for (item of history; track item.name + item.date) {
+      @for (item of history(); track item.name + item.date) {
         <div class="history-row">
           <div class="history-badge">
             <mat-icon>{{ item.icon }}</mat-icon>

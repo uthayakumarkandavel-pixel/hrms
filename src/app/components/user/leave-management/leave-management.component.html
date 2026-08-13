@@ -2,7 +2,7 @@
   <div class="balance-grid">
     <app-progress-card
       [title]="leaveManagement.LEAVE_PROGRESS"
-      [progressbar]="{ usedValue: usedLeaveDays(), totalValue: limits.annualLeaveDays }"
+      [progressbar]="{ usedValue: usedLeaveDays, totalValue: limits().annualLeaveDays }"
       [theme]="'#2563eb'"
       [icon]="'event_available'"
     />
@@ -10,8 +10,8 @@
     <app-progress-card
       [title]="leaveManagement.PERMISSION_PROGRESS"
       [progressbar]="{
-        usedValue: usedPermissionHours(),
-        totalValue: limits.monthlyPermissionHours,
+        usedValue: usedPermissionHours,
+        totalValue: limits().monthlyPermissionHours,
       }"
       [theme]="'#d97706'"
       [icon]="'schedule'"
