@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { Component, effect, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import {
@@ -26,11 +26,11 @@ export interface LeaveDialogData {
 }
 
 @Component({
-  selector: 'app-leave-request-dialog',
+  selector: 'hrms-leave-request-dialog',
   standalone: true,
 
   imports: [
-    CommonModule,
+    DatePipe,
     ReactiveFormsModule,
     MatButtonModule,
     MatDatepickerModule,

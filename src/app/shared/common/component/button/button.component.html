@@ -1,0 +1,14 @@
+<button
+  [class.primary]="variant === 'primary'"
+  [class.secondary]="variant === 'secondary'"
+  [disabled]="disabled"
+  [type]="type"
+  mat-raised-button
+  [attr.aria-label]="label"
+  (click)="pressed.emit()"
+>
+  @if (icon) {
+    <mat-icon>{{ icon }}</mat-icon>
+  }
+  <span>{{ label }}</span>
+</button>

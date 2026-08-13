@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { CONSTANTS } from '../../../constants/constant';
 
 @Component({
-  selector: 'app-auth-layout',
+  selector: 'hrms-auth-layout',
   imports: [RouterOutlet],
   templateUrl: './auth-layout.component.html',
   styleUrl: './auth-layout.component.scss',

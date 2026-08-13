@@ -1,22 +1,22 @@
-<div class="app-shell">
-  <header class="app-header">
-    <app-header (toggleSidebar)="toggleSidebar()"></app-header>
+<div class="hrms-shell">
+  <header class="hrms-header">
+    <hrms-header (toggleSidebar)="toggleSidebar()"></hrms-header>
   </header>
 
-  <mat-sidenav-container class="app-container">
+  <mat-sidenav-container class="hrms-container">
     <mat-sidenav
       #sidenav
-      class="app-sidebar"
+      class="hrms-sidebar"
       mode="side"
       [opened]="sidebarOpen"
       [class.sidebar-collapsed]="!sidebarOpen"
       [fixedInViewport]="false"
     >
-      <app-sidebar></app-sidebar>
+      <hrms-sidebar></hrms-sidebar>
     </mat-sidenav>
 
-    <mat-sidenav-content class="app-content">
-      <main class="app-main">
+    <mat-sidenav-content class="hrms-content">
+      <main class="hrms-main">
         @if (pageHeader) {
           <header class="page-header">
             <div class="page-title">

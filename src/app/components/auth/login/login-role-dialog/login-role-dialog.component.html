@@ -1,0 +1,44 @@
+<div class="role-dialog">
+  <div class="dialog-header">
+    <div class="dialog-icon">
+      <mat-icon>admin_panel_settings</mat-icon>
+    </div>
+
+    <div>
+      <h2>Admin account detected</h2>
+      <p>Choose which area you want to open for this demo.</p>
+    </div>
+  </div>
+
+  <div class="role-options">
+    <button class="role-card admin" type="button" (click)="selectAdmin()">
+      <span class="role-card-icon">
+        <mat-icon>admin_panel_settings</mat-icon>
+      </span>
+
+      <span class="role-card-content">
+        <strong>Login as Admin</strong>
+        <small>Manage users and approve leave requests</small>
+      </span>
+
+      <mat-icon class="arrow">chevron_right</mat-icon>
+    </button>
+
+    <button class="role-card user" type="button" (click)="selectUser()">
+      <span class="role-card-icon">
+        <mat-icon>person</mat-icon>
+      </span>
+
+      <span class="role-card-content">
+        <strong>Login as User</strong>
+        <small>Open the user dashboard as User One</small>
+      </span>
+
+      <mat-icon class="arrow">chevron_right</mat-icon>
+    </button>
+  </div>
+
+  <button class="cancel-button" mat-button type="button" (click)="close()">
+    Cancel
+  </button>
+</div>

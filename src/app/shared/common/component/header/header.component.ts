@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { CONSTANTS } from '../../../constants/constant';
 
 @Component({
-  selector: 'app-header',
+  selector: 'hrms-header',
   standalone: true,
   imports: [MatButtonModule, MatIconModule, MatMenuModule, MatDividerModule],
   templateUrl: './header.component.html',

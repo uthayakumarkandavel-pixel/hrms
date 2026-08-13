@@ -1,9 +1,73 @@
-<div class="login-options">
-  <button mat-raised-button color="primary" (click)="loginAsUser()">
-    {{ text.LOGIN_AS_USER }}
-  </button>
+<div class="login-page">
+  <div class="login-card">
+    <div class="login-brand">
+      <div class="brand-icon">
+        <mat-icon>business</mat-icon>
+      </div>
+      <span>HRMS Demo</span>
+    </div>
 
-  <button mat-raised-button color="accent" (click)="loginAsAdmin()">
-    {{ text.LOGIN_AS_ADMIN }}
-  </button>
+    <h1>Welcome back</h1>
+    <p class="subtitle">Enter your email and password to continue.</p>
+
+    <form [formGroup]="loginForm" (ngSubmit)="submit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="email"
+          formControlName="email"
+          autocomplete="email"
+          placeholder="Enter your email"
+        />
+        <mat-icon matSuffix>email</mat-icon>
+        @if (loginForm.controls.email.hasError('required')) {
+          <mat-error> Email is required </mat-error>
+        } @else if (loginForm.controls.email.hasError('email')) {
+          <mat-error> Enter a valid email </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          [type]="hidePassword ? 'password' : 'text'"
+          formControlName="password"
+          autocomplete="current-password"
+          placeholder="Enter your password"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          [attr.aria-label]="hidePassword ? 'Show password' : 'Hide password'"
+          (click)="hidePassword = !hidePassword"
+        >
+          <mat-icon>{{ hidePassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+        </button>
+        @if (loginForm.controls.password.hasError('required')) {
+          <mat-error> Password is required </mat-error>
+        }
+      </mat-form-field>
+
+      @if (loginError) {
+        <div class="login-error">
+          <mat-icon>error_outline</mat-icon>
+          <span>{{ loginError }}</span>
+        </div>
+      }
+
+      <button class="login-button" mat-raised-button color="primary" type="submit">
+        <mat-icon>login</mat-icon>
+        Login
+      </button>
+    </form>
+
+    <!-- <div class="demo-credentials">
+      <strong>Demo credentials</strong>
+      <span>Admin: admin&#64;hrms.demo / admin123</span>
+      <span>User: user1&#64;hrms.demo / user123</span>
+    </div> -->
+  </div>
 </div>

@@ -14,7 +14,7 @@ interface ProgressCardData {
 }
 
 @Component({
-  selector: 'app-progress-card',
+  selector: 'hrms-progress-card',
   imports: [MatCard, MatIcon],
   templateUrl: './progress-card.component.html',
   styleUrl: './progress-card.component.scss',

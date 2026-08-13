@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, effect, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 
@@ -22,11 +21,10 @@ export interface PermissionDialogData {
 }
 
 @Component({
-  selector: 'app-permission-request-dialog',
+  selector: 'hrms-permission-request-dialog',
   standalone: true,
 
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatDatepickerModule,

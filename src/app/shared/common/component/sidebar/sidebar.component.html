@@ -1,6 +1,6 @@
 <div class="sidebar">
   <nav class="sidebar-nav">
-    @for (item of items; track $index) {
+    @for (item of items; track item.link) {
       <a
         mat-button
         class="nav-item"

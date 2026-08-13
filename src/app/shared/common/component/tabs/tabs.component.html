@@ -1,0 +1,20 @@
+<div class="tabs" role="tablist">
+  @for (tab of tabs; track tab.label; let i = $index) {
+    <button
+      class="tab"
+      [class.active]="activeIndex === i"
+      type="button"
+      role="tab"
+      [attr.aria-selected]="activeIndex === i"
+      (click)="select(i)"
+    >
+      @if (tab.icon) {
+        <mat-icon>{{ tab.icon }}</mat-icon>
+      }
+      <span>{{ tab.label }}</span>
+      @if (tab.badge !== undefined) {
+        <span class="badge">{{ tab.badge }}</span>
+      }
+    </button>
+  }
+</div>

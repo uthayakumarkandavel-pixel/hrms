@@ -1,0 +1,24 @@
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+
+  &.pending {
+    background: var(--warning-soft, #fff7ed);
+    color: var(--warning-dark, #c2410c);
+  }
+
+  &.approved {
+    background: var(--success-soft, #ecfdf5);
+    color: var(--success-dark, #047857);
+  }
+
+  &.rejected {
+    background: var(--danger-soft, #fef2f2);
+    color: var(--danger-dark, #b91c1c);
+  }
+}

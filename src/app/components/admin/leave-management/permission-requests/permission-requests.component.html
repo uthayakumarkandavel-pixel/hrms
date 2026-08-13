@@ -1,0 +1,40 @@
+<section class="request-section">
+  @if (!requests.length) {
+    <div class="empty-state">
+      <mat-icon>schedule</mat-icon>
+      <p>No permission requests.</p>
+    </div>
+  }
+
+  @for (request of requests; track request.id) {
+    <hrms-request-card
+      [userName]="request.userName"
+      subtitle="Permission"
+      [status]="request.status"
+      [details]="[
+        { label: 'Date', value: (request.date | date: 'dd MMM yyyy') ?? '' },
+        { label: 'Hours', value: request.hours },
+        { label: 'Reason', value: request.reason }
+      ]"
+    >
+
+      @if (request.status === 'Pending') {
+        <div request-actions class="gap-20">
+          <hrms-button
+            label="Reject"
+            icon="close"
+            variant="secondary"
+            [disabled]="busy.has(request.id)"
+            (pressed)="reject(request.id)"
+          />
+          <hrms-button
+            label="Approve"
+            icon="check"
+            [disabled]="busy.has(request.id)"
+            (pressed)="approve(request.id)"
+          />
+        </div>
+      }
+    </hrms-request-card>
+  }
+</section>

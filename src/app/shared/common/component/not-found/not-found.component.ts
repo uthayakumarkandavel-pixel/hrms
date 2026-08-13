@@ -6,7 +6,7 @@ import { MatCard } from '@angular/material/card';
 import { CONSTANTS } from '../../../constants/constant';
 
 @Component({
-  selector: 'app-not-found',
+  selector: 'hrms-not-found',
   standalone: true,
   imports: [MatButtonModule, MatIconModule, RouterLink, MatCard],
   templateUrl: './not-found.component.html',

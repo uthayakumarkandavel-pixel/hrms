@@ -10,7 +10,7 @@ import { CONSTANTS } from '../../../constants/constant';
 type PageHeader = (typeof CONSTANTS.PAGE_HEADERS)[keyof typeof CONSTANTS.PAGE_HEADERS];
 
 @Component({
-  selector: 'app-root',
+  selector: 'hrms-root',
   standalone: true,
   imports: [RouterOutlet, MatSidenavModule, HeaderComponent, SidebarComponent],
   templateUrl: './layout.component.html',

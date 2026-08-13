@@ -1,0 +1,21 @@
+<article class="request-card">
+  <div class="request-main">
+    <div class="employee">
+      <div class="avatar" aria-hidden="true">{{ userName.charAt(0) }}</div>
+      <div class="employee-copy">
+        <strong>{{ userName }}</strong>
+        @if (subtitle) {
+          <span>{{ subtitle }}</span>
+        }
+      </div>
+    </div>
+
+    <hrms-detail-list [items]="details" />
+
+    <hrms-status-badge [status]="status" />
+  </div>
+
+  <div class="request-actions">
+    <ng-content select="[request-actions]" />
+  </div>
+</article>

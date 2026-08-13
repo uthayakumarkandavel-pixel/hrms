@@ -57,7 +57,7 @@ export const routes: Routes = [
       },
       {
         path:'',
-        redirectTo:'/home',
+        redirectTo:'/team-leader/home',
         pathMatch:'full'
       }
     ],
@@ -95,7 +95,7 @@ export const routes: Routes = [
       },
       {
         path:'',
-        redirectTo:'/home',
+        redirectTo:'/team-member/home',
         pathMatch:'full'
       }
     ],

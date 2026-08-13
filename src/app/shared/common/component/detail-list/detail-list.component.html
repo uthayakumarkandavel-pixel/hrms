@@ -1,0 +1,8 @@
+<div class="detail-list">
+  @for (item of items; track item.label) {
+    <div class="detail-item">
+      <small>{{ item.label }}</small>
+      <strong>{{ item.value }}</strong>
+    </div>
+  }
+</div>

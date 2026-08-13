@@ -1,0 +1,23 @@
+[
+  {
+    "id": "admin-001",
+    "name": "Admin",
+    "email": "admin@hrms.demo",
+    "password": "admin123",
+    "role": "admin"
+  },
+  {
+    "id": "user-001",
+    "name": "User One",
+    "email": "user1@hrms.demo",
+    "password": "user123",
+    "role": "user"
+  },
+  {
+    "id": "user-002",
+    "name": "User Two",
+    "email": "user2@hrms.demo",
+    "password": "user123",
+    "role": "user"
+  }
+]

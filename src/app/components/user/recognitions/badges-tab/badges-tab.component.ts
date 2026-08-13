@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatCardModule } from '@angular/material/card';
@@ -8,9 +7,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RecognitionService } from '../../../../services/recognition/recognition.service';
 
 @Component({
-  selector: 'app-badges-tab',
+  selector: 'hrms-badges-tab',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatChipsModule, MatIconModule, MatProgressBarModule],
+  imports: [MatCardModule, MatChipsModule, MatIconModule, MatProgressBarModule],
   templateUrl: './badges-tab.component.html',
   styleUrls: ['./badges-tab.component.scss'],
 })

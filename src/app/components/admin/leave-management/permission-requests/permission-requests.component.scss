@@ -1,0 +1,32 @@
+.permission-details {
+  grid-template-columns: repeat(3, minmax(90px, 1fr));
+}
+
+.request-section {
+  margin-top: 28px;
+}
+
+.empty-state {
+  padding: 60px 20px;
+  text-align: center;
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  color: var(--muted);
+
+  mat-icon {
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 8px;
+    font-size: 40px;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+.gap-20{
+  gap: 10px;
+  display: flex;
+}

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CONSTANTS } from '../../../constants/constant';
 
 @Component({
-  selector: 'app-footer',
+  selector: 'hrms-footer',
   imports: [],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss',

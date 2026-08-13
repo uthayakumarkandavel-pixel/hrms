@@ -7,7 +7,7 @@ import { CONSTANTS } from '../../../shared/constants/constant';
 import { HolidayService } from '../../../services/holiday/holiday.service';
 
 @Component({
-  selector: 'app-holiday',
+  selector: 'hrms-holiday',
   imports: [MatCard, MatChip, DatePipe, UpperCasePipe],
   templateUrl: './holiday.component.html',
   styleUrl: './holiday.component.scss',

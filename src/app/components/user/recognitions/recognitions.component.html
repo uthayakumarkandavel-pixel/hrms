@@ -1,11 +1,9 @@
 <div class="recognitions-page">
-  <mat-tab-group class="recognition-tabs" animationDuration="0ms">
-    <mat-tab [label]="RECOGNITIONS.BADGES">
-      <app-badges-tab />
-    </mat-tab>
+  <hrms-tabs [tabs]="tabs" [(activeIndex)]="activeTab" />
 
-    <mat-tab [label]="RECOGNITIONS.YOUR_BADGES">
-      <app-your-badges-tab />
-    </mat-tab>
-  </mat-tab-group>
+  @if (activeTab === 0) {
+    <hrms-badges-tab />
+  } @else {
+    <hrms-your-badges-tab />
+  }
 </div>

@@ -1,0 +1,12 @@
+<div class="leave-management-page">
+  <hrms-tabs [tabs]="tabs" [(activeIndex)]="activeTab"></hrms-tabs>
+
+  @if (activeTab === 0) {
+    <hrms-leave-requests [requests]="teamLeaves" (statusChange)="onLeaveStatusChange($event)" />
+  } @else {
+    <hrms-permission-requests
+      [requests]="teamPermissions"
+      (statusChange)="onPermissionStatusChange($event)"
+    />
+  }
+</div>

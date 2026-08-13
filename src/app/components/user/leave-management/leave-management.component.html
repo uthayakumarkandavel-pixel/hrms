@@ -1,13 +1,13 @@
 <div class="leave-page">
   <div class="balance-grid">
-    <app-progress-card
+    <hrms-progress-card
       [title]="leaveManagement.LEAVE_PROGRESS"
       [progressbar]="{ usedValue: usedLeaveDays, totalValue: limits().annualLeaveDays }"
       [theme]="'#2563eb'"
       [icon]="'event_available'"
     />
 
-    <app-progress-card
+    <hrms-progress-card
       [title]="leaveManagement.PERMISSION_PROGRESS"
       [progressbar]="{
         usedValue: usedPermissionHours,
@@ -18,27 +18,87 @@
     />
   </div>
 
-  <div class="quick-actions">
-    <button class="quick-action" type="button" (click)="openLeaveDialog()">
-      <div class="quick-action-icon common-icon leave-icon">
-        <mat-icon> event_note </mat-icon>
-      </div>
-      <div class="quick-action-content">
-        <strong>{{ leave.REQUEST_LEAVE }}</strong>
-        <span>{{ leave.REQUEST_LEAVE_DESCRIPTION }}</span>
-      </div>
-      <mat-icon class="arrow"> chevron_right </mat-icon>
-    </button>
+  <div>
+    <div class="quick-actions">
+      <button class="quick-action" type="button" (click)="openLeaveDialog()">
+        <div class="quick-action-icon common-icon leave-icon">
+          <mat-icon> event_note </mat-icon>
+        </div>
+        <div class="quick-action-content">
+          <strong>{{ leave.REQUEST_LEAVE }}</strong>
+          <span>{{ leave.REQUEST_LEAVE_DESCRIPTION }}</span>
+        </div>
+        <mat-icon class="arrow"> chevron_right </mat-icon>
+      </button>
 
-    <button class="quick-action" type="button" (click)="openPermissionDialog()">
-      <div class="quick-action-icon common-icon permission-icon">
-        <mat-icon> schedule </mat-icon>
-      </div>
-      <div class="quick-action-content">
-        <strong>{{ leave.REQUEST_PERMISSION }}</strong>
-        <span>{{ leave.REQUEST_PERMISSION_DESCRIPTION }}</span>
-      </div>
-      <mat-icon class="arrow"> chevron_right </mat-icon>
-    </button>
+      <button class="quick-action" type="button" (click)="openPermissionDialog()">
+        <div class="quick-action-icon common-icon permission-icon">
+          <mat-icon> schedule </mat-icon>
+        </div>
+        <div class="quick-action-content">
+          <strong>{{ leave.REQUEST_PERMISSION }}</strong>
+          <span>{{ leave.REQUEST_PERMISSION_DESCRIPTION }}</span>
+        </div>
+        <mat-icon class="arrow"> chevron_right </mat-icon>
+      </button>
+    </div>
   </div>
+  <hrms-tabs [tabs]="tabs" [(activeIndex)]="activeTab" />
+
+  @if (activeTab === 0) {
+    <section class="tab-content">
+      <div class="tab-heading">
+        <div>
+          <h3>Leave Requests</h3>
+          <p>Admin approval is required before leave can be taken.</p>
+        </div>
+        <hrms-button label="Request Leave" icon="add" (pressed)="openLeaveDialog()" />
+      </div>
+
+      <div class="request-history">
+        @for (request of leaveRequests(); track request.id) {
+          <div class="request-row">
+            <div>
+              <strong>{{ request.type }}</strong>
+              <span
+                >{{ request.from | date: 'dd MMM yyyy' }} -
+                {{ request.to | date: 'dd MMM yyyy' }}</span
+              >
+              <small>{{ request.days }} day(s) · {{ request.reason }}</small>
+            </div>
+
+            <hrms-status-badge [status]="request.status" />
+          </div>
+        } @empty {
+          <div class="empty-history">No leave requests yet.</div>
+        }
+      </div>
+    </section>
+  } @else {
+    <section class="tab-content">
+      <div class="tab-heading">
+        <div>
+          <h3>Permission Requests</h3>
+          <p>Admin approval is required before permission is granted.</p>
+        </div>
+        <hrms-button label="Request Permission" icon="add" (pressed)="openPermissionDialog()" />
+      </div>
+
+      <div class="request-history">
+        @for (request of permissionRequests(); track request.id) {
+          <div class="request-row">
+            <div>
+              <strong>{{ request.date | date: 'dd MMM yyyy' }}</strong>
+              <span>{{ request.hours }} hour(s)</span>
+              <small>{{ request.reason }}</small>
+            </div>
+
+            <hrms-status-badge [status]="request.status" />
+          </div>
+        } @empty {
+          <div class="empty-history">No permission requests yet.</div>
+        }
+      </div>
+    </section>
+  }
 </div>
