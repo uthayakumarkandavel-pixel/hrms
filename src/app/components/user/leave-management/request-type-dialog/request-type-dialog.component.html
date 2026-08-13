@@ -1,44 +1,34 @@
 <div class="dialog">
   <div class="dialog-header">
     <div>
-      <h2>New Request</h2>
-
-      <p>Choose the type of request.</p>
+      <h2>{{ text.TITLE }}</h2>
+      <p>{{ text.CAPTION }}</p>
     </div>
-
-    <button mat-icon-button type="button" (click)="close()">
+    <button mat-icon-button type="button" (click)="close()" [attr.aria-label]="text.CLOSE">
       <mat-icon> close </mat-icon>
     </button>
   </div>
 
   <div class="options">
-
     <button class="option" type="button" (click)="select('leave')">
-      <div class="option-icon leave">
+      <div class="option-icon common-icon leave">
         <mat-icon> event_available </mat-icon>
       </div>
-
       <div class="option-content">
-        <strong> Request Leave </strong>
-
-        <span> Apply for sick or casual leave </span>
+        <strong>{{ text.REQUEST_LEAVE }}</strong>
+        <span>{{ text.REQUEST_LEAVE_DESCRIPTION }}</span>
       </div>
-
       <mat-icon class="arrow"> chevron_right </mat-icon>
     </button>
 
-
     <button class="option" type="button" (click)="select('permission')">
-      <div class="option-icon permission">
+      <div class="option-icon common-icon permission">
         <mat-icon> schedule </mat-icon>
       </div>
-
       <div class="option-content">
-        <strong> Request Permission </strong>
-
-        <span> Up to 3 hours per month </span>
+        <strong>{{ text.REQUEST_PERMISSION }}</strong>
+        <span>{{ text.REQUEST_PERMISSION_DESCRIPTION }}</span>
       </div>
-
       <mat-icon class="arrow"> chevron_right </mat-icon>
     </button>
   </div>

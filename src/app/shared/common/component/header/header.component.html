@@ -4,28 +4,24 @@
       mat-icon-button
       class="sidebar-toggle"
       type="button"
-      aria-label="Toggle sidebar"
+      [attr.aria-label]="text.SEARCH"
       (click)="toggleSidebar.emit()"
     >
       <mat-icon>menu</mat-icon>
     </button>
     <div class="header-brand">
       <div class="header-brand-mark">
-        <img src="/assets/logo.png" alt="HRMS" />
+        <img src="/assets/logo.png" [alt]="app.NAME" />
       </div>
       <div class="header-brand-copy">
-        <strong>HRMS</strong>
-        <span>People workspace</span>
+        <strong>{{ app.NAME }}</strong>
+        <span>{{ app.TAGLINE }}</span>
       </div>
     </div>
   </div>
 
   <div class="header-actions">
-    <button mat-icon-button class="header-action" aria-label="Search">
-      <mat-icon>search</mat-icon>
-    </button>
-
-    <button mat-icon-button class="header-action notification" aria-label="Notifications">
+    <button mat-icon-button class="header-action notification" [attr.aria-label]="text.NOTIFICATIONS">
       <mat-icon>notifications_none</mat-icon>
       <span class="notification-badge">3</span>
     </button>
@@ -35,8 +31,8 @@
     <button mat-button class="profile-button" [matMenuTriggerFor]="userMenu">
       <span class="avatar">HR</span>
       <span class="profile-copy">
-        <strong>My Account</strong>
-        <small>Account settings</small>
+        <strong>{{ text.MY_ACCOUNT }}</strong>
+        <small>{{ text.ACCOUNT_SETTINGS }}</small>
       </span>
       <mat-icon>keyboard_arrow_down</mat-icon>
     </button>
@@ -46,15 +42,15 @@
 <mat-menu #userMenu="matMenu">
   <button mat-menu-item>
     <mat-icon>person_outline</mat-icon>
-    <span>Profile</span>
+    <span>{{ text.PROFILE }}</span>
   </button>
   <button mat-menu-item>
     <mat-icon>settings</mat-icon>
-    <span>Settings</span>
+    <span>{{ text.SETTINGS }}</span>
   </button>
   <mat-divider></mat-divider>
   <button mat-menu-item (click)="logout()">
     <mat-icon>logout</mat-icon>
-    <span>Logout</span>
+    <span>{{ text.LOGOUT }}</span>
   </button>
 </mat-menu>

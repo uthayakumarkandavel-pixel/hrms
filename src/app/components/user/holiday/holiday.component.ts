@@ -12,5 +12,6 @@ import { CONSTANTS } from '../../../shared/constants/constant';
   styleUrl: './holiday.component.scss',
 })
 export class HolidayComponent {
+  text = CONSTANTS.HOLIDAY;
   holidays = CONSTANTS.HOLIDAYS[2026];
 }

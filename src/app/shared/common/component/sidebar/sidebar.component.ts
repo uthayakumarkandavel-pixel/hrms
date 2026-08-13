@@ -10,14 +10,13 @@ import { CONSTANTS } from '../../../constants/constant';
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-
   imports: [RouterLink, RouterLinkActive, MatButtonModule, MatIconModule, MatDividerModule],
-
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent implements OnInit {
-  items: { title: string; icon: string; link: string }[] = [];
+  items: ReadonlyArray<{ title: string; icon: string; link: string }> = [];
+  SIDEBAR = CONSTANTS.SIDEBAR;
   private readonly router = inject(Router);
 
   ngOnInit(): void {

@@ -19,7 +19,7 @@
 
     <span>
       / {{ progressbar.totalValue }}
-      used
+      {{ text.USED }}
     </span>
   </div>
 
@@ -32,6 +32,6 @@
   </div>
 
   <div class="balance-footer">
-    <span> {{ progressbar.totalValue-progressbar.usedValue }} {{title.TITLE}} remaining </span>
+    <span> {{ progressbar.totalValue-progressbar.usedValue }} {{title.TITLE}} {{ text.REMAINING }} </span>
   </div>
 </mat-card>

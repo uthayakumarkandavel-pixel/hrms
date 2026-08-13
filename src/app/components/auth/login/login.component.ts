@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
+import { CONSTANTS } from '../../../shared/constants/constant';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +11,8 @@ import { AuthService } from '../../../services/auth.service';
 export class LoginComponent {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
+
+   text = CONSTANTS.AUTH;
 
   loginAsUser(): void {
     this.authService.login({ id: 'user', role: 'user' });

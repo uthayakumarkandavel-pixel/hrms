@@ -48,10 +48,12 @@ export const routes: Routes = [
       {
         path: 'home',
         component: HomeComponent,
+        data: { pageHeader: 'ADMIN_HOME' },
       },
       {
         path: 'leave-management',
         component: LeaveManagementComponent,
+        data: { pageHeader: 'ADMIN_LEAVE_MANAGEMENT' },
       },
       {
         path:'',
@@ -69,22 +71,27 @@ export const routes: Routes = [
       {
         path: 'home',
         component: HomeUserComponent,
+        data: { pageHeader: 'USER_HOME' },
       },
       {
         path: 'attendance',
         component: AttendenceComponent,
+        data: { pageHeader: 'ATTENDANCE' },
       },
       {
         path: 'holiday',
         component: HolidayComponent,
+        data: { pageHeader: 'HOLIDAY' },
       },
       {
         path: 'leave-management',
         component: LeaveManagementUserComponent,
+        data: { pageHeader: 'LEAVE_MANAGEMENT' },
       },
       {
         path: 'recognitions',
         component: RecognitionsComponent,
+        data: { pageHeader: 'RECOGNITIONS' },
       },
       {
         path:'',

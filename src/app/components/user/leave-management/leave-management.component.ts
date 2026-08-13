@@ -4,7 +4,11 @@ import { Component, computed, inject, signal, WritableSignal } from '@angular/co
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { LeaveRequest, PermissionRequest, RequestStatus } from '../../../shared/types/leave-management';
+import {
+  LeaveRequest,
+  PermissionRequest,
+  RequestStatus,
+} from '../../../shared/types/leave-management';
 import { CONSTANTS } from '../../../shared/constants/constant';
 import { RequestTypeDialogComponent } from './request-type-dialog/request-type-dialog.component';
 import { LeaveRequestDialogComponent } from './leave-request-dialog/leave-request-dialog.component';
@@ -21,7 +25,8 @@ import { ProgressCardComponent } from '../../../shared/common/component/progress
 export class LeaveManagementUserComponent {
   private readonly dialog = inject(MatDialog);
 
-  readonly leaveManagement = CONSTANTS.LEAVE_MANAGEMENT;
+  leaveManagement = CONSTANTS.LEAVE_MANAGEMENT;
+  leave = CONSTANTS.LEAVE;
 
   readonly limits = this.leaveManagement.LEAVE_LIMITS;
 

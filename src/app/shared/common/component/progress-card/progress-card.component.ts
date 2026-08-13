@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatCard } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
+import { CONSTANTS } from '../../../constants/constant';
 
 interface ProgressCardTitle {
   TITLE: string;
@@ -19,6 +20,7 @@ interface ProgressCardData {
   styleUrl: './progress-card.component.scss',
 })
 export class ProgressCardComponent {
+  text = CONSTANTS.PROGRESS_CARD;
   @Input() title: ProgressCardTitle = { TITLE: '', CAPTION: '' };
   @Input() progressbar: ProgressCardData = { usedValue: 0, totalValue: 1 };
   @Input() theme = '';

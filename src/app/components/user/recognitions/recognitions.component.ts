@@ -42,6 +42,7 @@ interface BadgeHistory {
   styleUrls: ['./recognitions.component.scss'],
 })
 export class RecognitionsComponent {
+  text = CONSTANTS.RECOGNITIONS;
   badges=CONSTANTS.BADGES.badges
   history=CONSTANTS.BADGES.history
 }

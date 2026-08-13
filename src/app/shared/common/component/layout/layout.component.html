@@ -4,12 +4,28 @@
   </header>
 
   <mat-sidenav-container class="app-container">
-    <mat-sidenav #sidenav class="app-sidebar" mode="side" [opened]="sidebarOpen" [class.sidebar-collapsed]="!sidebarOpen" [fixedInViewport]="false">
+    <mat-sidenav
+      #sidenav
+      class="app-sidebar"
+      mode="side"
+      [opened]="sidebarOpen"
+      [class.sidebar-collapsed]="!sidebarOpen"
+      [fixedInViewport]="false"
+    >
       <app-sidebar></app-sidebar>
     </mat-sidenav>
 
     <mat-sidenav-content class="app-content">
       <main class="app-main">
+        @if (pageHeader) {
+          <header class="page-header">
+            <div class="page-title">
+              <h1>{{ pageHeader.TITLE }}</h1>
+              <p>{{ pageHeader.CAPTION }}</p>
+            </div>
+          </header>
+        }
+
         <router-outlet></router-outlet>
       </main>
     </mat-sidenav-content>

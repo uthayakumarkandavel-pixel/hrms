@@ -1,13 +1,13 @@
 <div class="not-found-container">
   <mat-card class="not-found-content">
     <div class="error-icon"><mat-icon>search_off</mat-icon></div>
-    <span class="eyebrow">ERROR 404</span>
+    <span class="eyebrow">{{ text.EYEBROW }}</span>
     <div class="error-code">404</div>
-    <h1>Page not found</h1>
-    <p>The page you're looking for doesn't exist, may have moved, or is not available for your current workspace.</p>
+    <h1>{{ text.TITLE }}</h1>
+    <p>{{ text.DESCRIPTION }}</p>
     <button mat-flat-button routerLink="/login">
       <mat-icon>home</mat-icon>
-      Back to login
+      {{ text.BACK_TO_LOGIN }}
     </button>
   </mat-card>
 </div>

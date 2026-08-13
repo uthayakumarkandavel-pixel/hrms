@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { CONSTANTS } from '../../../../shared/constants/constant';
 export type RequestType = 'leave' | 'permission';
 
 @Component({
@@ -12,6 +13,7 @@ export type RequestType = 'leave' | 'permission';
   styleUrl: './request-type-dialog.component.scss',
 })
 export class RequestTypeDialogComponent {
+  text = CONSTANTS.REQUEST_TYPE_DIALOG;
   private readonly dialogRef = inject(MatDialogRef<RequestTypeDialogComponent>);
 
   select(type: RequestType): void {

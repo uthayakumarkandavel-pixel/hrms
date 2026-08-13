@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
 import { PermissionRequestResult } from '../../../../shared/types/leave-management';
+import { CONSTANTS } from '../../../../shared/constants/constant';
 
 export interface PermissionDialogData {
   remainingHours: number;
@@ -42,6 +43,7 @@ export interface PermissionDialogData {
   styleUrl: './permission-request-dialog.component.scss',
 })
 export class PermissionRequestDialogComponent {
+  text = CONSTANTS.PERMISSION_DIALOG;
   private readonly fb = inject(FormBuilder);
 
   private readonly dialogRef = inject(MatDialogRef<PermissionRequestDialogComponent>);

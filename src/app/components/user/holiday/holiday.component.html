@@ -1,19 +1,12 @@
 <div class="holidays-page">
-  <header class="page-header">
-    <div class="page-title">
-      <h1>Company Holidays</h1>
-      <p>Official holidays and important dates for 2026.</p>
-    </div>
-  </header>
-
-  <mat-card class="holidays-card">
+  <mat-card class="holidays-card common-card">
     <div class="card-header">
       <div class="card-title">
-        <h2>Holiday Calendar</h2>
-        <p>Company holidays for the current year</p>
+        <h2>{{ text.CALENDAR_TITLE }}</h2>
+        <p>{{ text.CALENDAR_CAPTION }}</p>
       </div>
       <mat-chip>
-        {{ holidays.length }} Holidays
+        {{ holidays.length }} {{ text.HOLIDAYS_SUFFIX }}
       </mat-chip>
     </div>
 
@@ -24,15 +17,10 @@
             <span class="month">
               {{ holiday.date | date: 'MMM' | uppercase }}
             </span>
-
-            <strong>
-              {{ holiday.date | date: 'dd' }}
-            </strong>
+            <strong>{{ holiday.date | date: 'dd' }}</strong>
           </div>
-
           <div class="holiday-info">
             <h3>{{ holiday.name }}</h3>
-
             <time [attr.datetime]="holiday.date">
               {{ holiday.date | date: 'EEEE, MMMM d, y' }}
             </time>

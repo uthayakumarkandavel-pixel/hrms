@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
-import { MatCard } from "@angular/material/card";
+import { MatCard } from '@angular/material/card';
+import { CONSTANTS } from '../../../constants/constant';
 
 @Component({
   selector: 'app-not-found',
@@ -11,4 +12,6 @@ import { MatCard } from "@angular/material/card";
   templateUrl: './not-found.component.html',
   styleUrl: './not-found.component.scss',
 })
-export class NotFoundComponent {}
+export class NotFoundComponent {
+  text = CONSTANTS.NOT_FOUND;
+}

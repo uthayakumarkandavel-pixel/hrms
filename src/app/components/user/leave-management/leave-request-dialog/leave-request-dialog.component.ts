@@ -18,6 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { LeaveRequestResult, LeaveType } from '../../../../shared/types/leave-management';
+import { CONSTANTS } from '../../../../shared/constants/constant';
 
 export interface LeaveDialogData {
   remainingDays: number;
@@ -44,6 +45,7 @@ export interface LeaveDialogData {
   styleUrl: './leave-request-dialog.component.scss',
 })
 export class LeaveRequestDialogComponent {
+  text = CONSTANTS.LEAVE_DIALOG;
   private readonly fb = inject(FormBuilder);
 
   private readonly dialogRef = inject(MatDialogRef<LeaveRequestDialogComponent>);

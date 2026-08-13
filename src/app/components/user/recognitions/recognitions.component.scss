@@ -1,11 +1,3 @@
-$primary: #2563eb;
-$text: #172033;
-$muted: #667085;
-$border: #e5e7eb;
-$surface: #ffffff;
-$background: #f6f8fc;
-$success: #16a34a;
-
 :host {
   display: block;
   min-height: 100%;
@@ -18,35 +10,8 @@ $success: #16a34a;
 .recognitions-page {
   min-height: 100%;
   padding: 32px;
-  background: $background;
-  color: $text;
-}
-
-.page-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  margin-bottom: 18px;
-
-  h1 {
-    margin: 0 0 6px;
-    font-size: 30px;
-    font-weight: 700;
-  }
-
-  p {
-    margin: 0;
-    color: $muted;
-  }
-
-  button {
-    height: 42px;
-
-    mat-icon {
-      margin-right: 6px;
-    }
-  }
+  background: var(--background);
+  color: var(--text);
 }
 
 .recognition-tabs {
@@ -63,14 +28,6 @@ $success: #16a34a;
   padding-top: 24px;
 }
 
-.main-card,
-.history-card,
-.about-card {
-  border-radius: 16px !important;
-  border: 1px solid $border;
-  box-shadow: none !important;
-  background: $surface;
-}
 
 .main-card {
   padding: 24px;
@@ -90,7 +47,7 @@ $success: #16a34a;
 
   p {
     margin: 0;
-    color: $muted;
+    color: var(--muted);
     font-size: 14px;
   }
 }
@@ -104,7 +61,7 @@ $success: #16a34a;
   background: #f3f7ff;
 
   mat-icon {
-    color: $primary;
+    color: var(--primary);
   }
 
   strong,
@@ -118,7 +75,7 @@ $success: #16a34a;
 
   span {
     margin-top: 3px;
-    color: $muted;
+    color: var(--muted);
     font-size: 12px;
   }
 }
@@ -136,9 +93,6 @@ $success: #16a34a;
   align-items: center;
   display: flex;
   flex-direction: column;
-  border-radius: 14px !important;
-  border: 1px solid $border;
-  box-shadow: none !important;
 
   h3 {
     margin: 14px 0 8px;
@@ -148,7 +102,7 @@ $success: #16a34a;
   p {
     min-height: 36px;
     margin: 12px 0;
-    color: $muted;
+    color: var(--muted);
     font-size: 13px;
   }
 
@@ -169,7 +123,7 @@ $success: #16a34a;
   border-radius: 50%;
   background: #eff6ff;
   border: 7px solid #dbeafe;
-  color: $primary;
+  color: var(--primary);
 
   mat-icon {
     font-size: 40px;
@@ -182,11 +136,11 @@ $success: #16a34a;
   .badge-icon {
     background: #ecfdf3;
     border-color: #bbf7d0;
-    color: $success;
+    color: var(--success);
   }
 
   h3 {
-    color: $success;
+    color: var(--success);
   }
 }
 
@@ -212,7 +166,7 @@ $success: #16a34a;
   span {
     display: block;
     margin-top: 7px;
-    color: $muted;
+    color: var(--muted);
     font-size: 12px;
   }
 }
@@ -250,7 +204,7 @@ $success: #16a34a;
 
   p {
     margin: 4px 0 0;
-    color: $muted;
+    color: var(--muted);
     font-size: 13px;
   }
 }
@@ -261,7 +215,7 @@ $success: #16a34a;
   align-items: center;
   gap: 14px;
   padding: 16px 0;
-  border-top: 1px solid $border;
+  border-top: 1px solid var(--border);
 }
 
 .history-badge {
@@ -271,7 +225,7 @@ $success: #16a34a;
   place-items: center;
   border-radius: 10px;
   background: #eff6ff;
-  color: $primary;
+  color: var(--primary);
 
   mat-icon {
     font-size: 22px;
@@ -290,7 +244,7 @@ $success: #16a34a;
 
   span {
     margin-top: 4px;
-    color: $muted;
+    color: var(--muted);
     font-size: 12px;
   }
 }
@@ -302,7 +256,7 @@ $success: #16a34a;
   }
 
   small {
-    color: $muted;
+    color: var(--muted);
     font-size: 11px;
   }
 
@@ -324,7 +278,7 @@ $success: #16a34a;
   gap: 12px;
   align-items: flex-start;
   padding: 13px 0;
-  border-top: 1px solid $border;
+  border-top: 1px solid var(--border);
 
   mat-icon {
     width: 30px;
@@ -332,7 +286,7 @@ $success: #16a34a;
     padding: 5px;
     border-radius: 8px;
     background: #eff6ff;
-    color: $primary;
+    color: var(--primary);
     font-size: 20px;
   }
 
@@ -358,13 +312,6 @@ $success: #16a34a;
   .recognitions-page {
     padding: 20px;
   }
-
-  .page-header,
-  .section-header {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
   .badge-grid {
     grid-template-columns: 1fr;
   }
