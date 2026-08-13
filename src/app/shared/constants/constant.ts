@@ -183,7 +183,15 @@ export const CONSTANTS = {
   },
 
   BADGES: {
-    badges: [
+    BADGES_TITLE: 'Recognition Badges',
+    BADGES_DESCRIPTION: 'Build a culture of appreciation by celebrating meaningful contributions.',
+    EARNED: 'earned',
+    BADGES_EARNED: 'badges earned',
+    RECOGNITION_HISTORY: 'Recognition History',
+    RECOGNITION_HISTORY_DESCRIPTION: 'A record of the recognition you have received.',
+    AWARDED_BY: 'Awarded by',
+    NO_BADGES: 'You have not received any badges yet.',
+    CATALOG: [
       {
         name: 'Consistent Contributor',
         duration: '1 Month',
@@ -225,23 +233,19 @@ export const CONSTANTS = {
         target: 12,
       },
     ],
-    history: [
+    HISTORY: [
       {
         name: 'Attendance Champion',
         description: 'No unplanned absence for 3 consecutive months',
+        awardedBy: 'Anita Rao',
         date: '11 Aug 2026',
         icon: 'military_tech',
       },
       {
         name: 'Consistent Contributor',
         description: 'No unplanned absence for 1 month',
+        awardedBy: 'Rahul Menon',
         date: '01 Jun 2026',
-        icon: 'workspace_premium',
-      },
-      {
-        name: 'Consistent Contributor',
-        description: 'No unplanned absence for 1 month',
-        date: '01 May 2026',
         icon: 'workspace_premium',
       },
     ],

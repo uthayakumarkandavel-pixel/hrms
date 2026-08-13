@@ -21,6 +21,10 @@
   </div>
 
   <div class="header-actions">
+    <button mat-icon-button class="header-action" [attr.aria-label]="text.SEARCH">
+      <mat-icon>search</mat-icon>
+    </button>
+
     <button mat-icon-button class="header-action notification" [attr.aria-label]="text.NOTIFICATIONS">
       <mat-icon>notifications_none</mat-icon>
       <span class="notification-badge">3</span>

@@ -1,0 +1,77 @@
+.tab-content {
+  padding-top: 20px;
+}
+
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.badge-card {
+  border-radius: 16px;
+  padding: 20px;
+  min-height: 230px;
+}
+
+.badge-card.locked {
+  opacity: .72;
+}
+
+.badge-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.badge-icon {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #eff6ff;
+  color: var(--primary);
+}
+
+.earned-chip {
+  background: #ecfdf3 !important;
+  color: #15803d !important;
+}
+
+.badge-card h3 {
+  margin: 18px 0 7px;
+  font-size: 16px;
+}
+
+.badge-card p {
+  min-height: 38px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.badge-duration {
+  display: inline-block;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.progress-section {
+  margin-top: 16px;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.progress-label strong {
+  color: var(--text);
+}
