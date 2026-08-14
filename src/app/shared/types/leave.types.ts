@@ -14,6 +14,7 @@ export interface LeaveRequest {
   days: number;
   reason: string;
   status: RequestStatus;
+  rejectionReason?: string;
 }
 export interface LeaveRequestPayload {
   userId: string;

@@ -1,0 +1,17 @@
+.description {
+  margin: 0 0 16px;
+  color: var(--muted);
+}
+
+.full-width {
+  width: 100%;
+}
+
+mat-dialog-content {
+  min-width: min(520px, 80vw);
+}
+
+mat-dialog-actions {
+  gap: 10px;
+  padding-top: 8px;
+}

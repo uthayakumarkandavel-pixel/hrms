@@ -1,32 +1,20 @@
 <div class="holidays-page">
-  <mat-card class="holidays-card common-card">
-    <div class="card-header">
-      <div class="card-title">
-        <h2>{{ text.CALENDAR_TITLE }}</h2>
-        <p>{{ text.CALENDAR_CAPTION }}</p>
-      </div>
-      <mat-chip>
-        {{ holidays().length }} {{ text.HOLIDAYS_SUFFIX }}
-      </mat-chip>
-    </div>
-
-    <div class="holiday-grid">
-      @for (holiday of holidays(); track holiday.date) {
-        <article class="holiday-tile">
-          <div class="date-box" aria-hidden="true">
-            <span class="month">
-              {{ holiday.date | date: 'MMM' | uppercase }}
-            </span>
-            <strong>{{ holiday.date | date: 'dd' }}</strong>
-          </div>
-          <div class="holiday-info">
-            <h3>{{ holiday.name }}</h3>
-            <time [attr.datetime]="holiday.date">
-              {{ holiday.date | date: 'EEEE, MMMM d, y' }}
-            </time>
-          </div>
-        </article>
-      }
-    </div>
-  </mat-card>
+  <div class="holiday-grid">
+    @for (holiday of holidays(); track holiday.date) {
+      <article class="holiday-tile">
+        <div class="date-box" aria-hidden="true">
+          <span class="month">
+            {{ holiday.date | date: 'MMM' | uppercase }}
+          </span>
+          <strong>{{ holiday.date | date: 'dd' }}</strong>
+        </div>
+        <div class="holiday-info">
+          <h3>{{ holiday.name }}</h3>
+          <time [attr.datetime]="holiday.date">
+            {{ holiday.date | date: 'EEEE, MMMM d, y' }}
+          </time>
+        </div>
+      </article>
+    }
+  </div>
 </div>

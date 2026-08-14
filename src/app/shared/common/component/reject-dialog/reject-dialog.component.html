@@ -1,0 +1,46 @@
+<h2 mat-dialog-title>Reject Leave Request</h2>
+
+<mat-dialog-content>
+  <p class="description">
+    Please provide a reason for rejecting this leave request.
+  </p>
+
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Rejection reason</mat-label>
+      <textarea
+        matInput
+        formControlName="reason"
+        rows="4"
+        maxlength="250"
+        placeholder="Enter the reason for rejection"
+      ></textarea>
+
+      @if (form.controls.reason.hasError('required') && form.controls.reason.touched) {
+        <mat-error>Rejection reason is required.</mat-error>
+      }
+
+      @if (form.controls.reason.hasError('minlength') && form.controls.reason.touched) {
+        <mat-error>Reason must be at least 3 characters.</mat-error>
+      }
+
+      <mat-hint align="end">
+        {{ form.controls.reason.value.length }}/250
+      </mat-hint>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <hrms-button
+    label="Cancel"
+    variant="secondary"
+    (pressed)="cancel()"
+  />
+  <hrms-button
+    label="Reject"
+    icon="close"
+    [disabled]="form.invalid"
+    (pressed)="confirm()"
+  />
+</mat-dialog-actions>

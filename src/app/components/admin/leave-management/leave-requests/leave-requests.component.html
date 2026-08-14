@@ -18,6 +18,12 @@
         { label: 'Reason', value: request.reason }
       ]"
     >
+      @if (request.status === 'Rejected' && request.rejectionReason) {
+        <div request-actions class="rejection-reason">
+          <mat-icon>info</mat-icon>
+          <span>{{ request.rejectionReason }}</span>
+        </div>
+      }
 
       @if (request.status === 'Pending') {
         <div request-actions class="gap-20">

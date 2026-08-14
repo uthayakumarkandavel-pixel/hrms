@@ -1,12 +1,5 @@
 <div class="tab-content">
   <mat-card class="history-card">
-    <div class="section-heading">
-      <div>
-        <h2>{{ BADGES.RECOGNITION_HISTORY }}</h2>
-        <p>{{ BADGES.RECOGNITION_HISTORY_DESCRIPTION }}</p>
-      </div>
-    </div>
-
     <div class="history-list">
       @for (item of history(); track item.name + item.date) {
         <div class="history-row">
@@ -16,7 +9,6 @@
           <div class="history-details">
             <strong>{{ item.name }}</strong>
             <span>{{ item.description }}</span>
-            <small>{{ BADGES.AWARDED_BY }} {{ item.awardedBy }}</small>
           </div>
           <span class="history-date">{{ item.date }}</span>
         </div>

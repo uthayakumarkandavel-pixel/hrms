@@ -7,3 +7,10 @@ export interface DemoLoginUser {
   password: string;
   role: DemoRole;
 }
+
+
+export interface AuthUser {
+  id: string;
+  name?: string;
+  role: DemoRole;
+}

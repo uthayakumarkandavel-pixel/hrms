@@ -1,13 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable, map, shareReplay, throwError } from 'rxjs';
-import { DemoLoginUser, DemoRole } from '../shared/types/auth.types';
+import { AuthUser, DemoLoginUser } from '../shared/types/auth.types';
 
-export interface AuthUser {
-  id: string;
-  name?: string;
-  role: DemoRole;
-}
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

@@ -1,0 +1,31 @@
+{
+  "limits": {
+    "monthlyPermissionHours": 8
+  },
+  "users": {
+    "user-001": {
+      "requests": [
+        {
+          "id": "PR-001",
+          "userId": "user-001",
+          "date": "2026-08-14",
+          "hours": 2,
+          "reason": "Doctor appointment",
+          "status": "Pending"
+        }
+      ]
+    },
+    "user-002": {
+      "requests": [
+        {
+          "id": "PR-002",
+          "userId": "user-002",
+          "date": "2026-08-18",
+          "hours": 1,
+          "reason": "Personal work",
+          "status": "Approved"
+        }
+      ]
+    }
+  }
+}

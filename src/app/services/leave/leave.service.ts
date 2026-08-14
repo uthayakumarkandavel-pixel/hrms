@@ -53,6 +53,7 @@ export class LeaveService {
   updateLeaveRequestStatus(
     requestId: string,
     status: 'Approved' | 'Rejected',
+    rejectionReason?: string,
   ): Observable<LeaveRequest | undefined> {
     return this.loadedRequests$.pipe(
       map(() => {
@@ -65,6 +66,9 @@ export class LeaveService {
         const updatedRequest: LeaveRequest = {
           ...request,
           status,
+          ...(status === 'Rejected'
+            ? { rejectionReason: rejectionReason?.trim() ?? '' }
+            : { rejectionReason: undefined }),
         };
 
         this.requestsSubject.next(

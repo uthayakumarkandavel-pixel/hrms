@@ -9,8 +9,8 @@
     </div>
 
     <div>
-      <span class="balance-title">{{ title.TITLE }}</span>
-      <span class="balance-subtitle">{{ title.CAPTION }}</span>
+      <span class="balance-title">{{ title?.TITLE }}</span>
+      <span class="balance-subtitle">{{ title?.CAPTION }}</span>
     </div>
   </div>
 
@@ -32,6 +32,6 @@
   </div>
 
   <div class="balance-footer">
-    <span> {{ progressbar.totalValue-progressbar.usedValue }} {{title.TITLE}} {{ text.REMAINING }} </span>
+    <span> {{ progressbar.totalValue-progressbar.usedValue }} {{title?.TITLE}} {{ text.REMAINING }} </span>
   </div>
 </mat-card>

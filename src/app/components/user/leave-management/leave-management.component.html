@@ -67,7 +67,7 @@
               <small>{{ request.days }} day(s) · {{ request.reason }}</small>
             </div>
 
-            <hrms-status-badge [status]="request.status" />
+            <hrms-status-badge [status]="request.status" [rejectReason]="request.rejectionReason??''"/>
           </div>
         } @empty {
           <div class="empty-history">No leave requests yet.</div>

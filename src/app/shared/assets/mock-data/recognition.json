@@ -1,0 +1,114 @@
+{
+  "users": {
+    "user-001": {
+      "badges": [
+        {
+          "name": "Consistent Contributor",
+          "duration": "1 Month",
+          "description": "No unplanned absence",
+          "icon": "workspace_premium",
+          "status": "Earned",
+          "progress": 100,
+          "current": 1,
+          "target": 1
+        },
+        {
+          "name": "Attendance Champion",
+          "duration": "3 Months",
+          "description": "No unplanned absence",
+          "icon": "military_tech",
+          "status": "Earned",
+          "progress": 100,
+          "current": 3,
+          "target": 3
+        },
+        {
+          "name": "Reliability Star",
+          "duration": "6 Months",
+          "description": "No unplanned absence",
+          "icon": "star",
+          "status": "In Progress",
+          "progress": 50,
+          "current": 3,
+          "target": 6
+        },
+        {
+          "name": "Attendance Excellence",
+          "duration": "12 Months",
+          "description": "No unplanned absence",
+          "icon": "emoji_events",
+          "status": "Locked",
+          "progress": 25,
+          "current": 3,
+          "target": 12
+        }
+      ],
+      "history": [
+        {
+          "name": "Attendance Champion",
+          "description": "No unplanned absence for 3 consecutive months",
+          "date": "2026-08-11",
+          "icon": "military_tech"
+        },
+        {
+          "name": "Consistent Contributor",
+          "description": "No unplanned absence for 1 month",
+          "date": "2026-06-01",
+          "icon": "workspace_premium"
+        }
+      ]
+    },
+    "user-002": {
+      "badges": [
+        {
+          "name": "Consistent Contributor",
+          "duration": "1 Month",
+          "description": "No unplanned absence",
+          "icon": "workspace_premium",
+          "status": "Earned",
+          "progress": 100,
+          "current": 1,
+          "target": 1
+        },
+        {
+          "name": "Attendance Champion",
+          "duration": "3 Months",
+          "description": "No unplanned absence",
+          "icon": "military_tech",
+          "status": "In Progress",
+          "progress": 67,
+          "current": 2,
+          "target": 3
+        },
+        {
+          "name": "Reliability Star",
+          "duration": "6 Months",
+          "description": "No unplanned absence",
+          "icon": "star",
+          "status": "Locked",
+          "progress": 0,
+          "current": 0,
+          "target": 6
+        },
+        {
+          "name": "Attendance Excellence",
+          "duration": "12 Months",
+          "description": "No unplanned absence",
+          "icon": "emoji_events",
+          "status": "Locked",
+          "progress": 0,
+          "current": 0,
+          "target": 12
+        }
+      ],
+      "history": [
+        {
+          "name": "Consistent Contributor",
+          "description": "No unplanned absence for 1 month",
+          "date": "2026-07-15",
+          "icon": "workspace_premium"
+        }
+      ]
+    }
+  }
+}

@@ -12,7 +12,14 @@ export interface Badge {
 export interface BadgeHistory {
   name: string;
   description: string;
-  awardedBy: string;
   date: string;
   icon: string;
+}
+export interface RecognitionUserData {
+  badges: Badge[];
+  history: BadgeHistory[];
+}
+
+export interface RecognitionData {
+  users: Record<string, RecognitionUserData>;
 }

@@ -21,7 +21,7 @@ interface ProgressCardData {
 })
 export class ProgressCardComponent {
   text = CONSTANTS.PROGRESS_CARD;
-  @Input() title: ProgressCardTitle = { TITLE: '', CAPTION: '' };
+  @Input() title?: ProgressCardTitle = { TITLE: '', CAPTION: '' };
   @Input() progressbar: ProgressCardData = { usedValue: 0, totalValue: 1 };
   @Input() theme = '';
   @Input() icon = '';

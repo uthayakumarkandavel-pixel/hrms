@@ -2,14 +2,12 @@
   {
     "name": "Attendance Champion",
     "description": "No unplanned absence for 3 consecutive months",
-    "awardedBy": "Anita Rao",
     "date": "2026-08-11",
     "icon": "military_tech"
   },
   {
     "name": "Consistent Contributor",
     "description": "No unplanned absence for 1 month",
-    "awardedBy": "Rahul Menon",
     "date": "2026-06-01",
     "icon": "workspace_premium"
   }
