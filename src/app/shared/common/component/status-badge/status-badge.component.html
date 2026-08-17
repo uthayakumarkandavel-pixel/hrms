@@ -1,17 +1,16 @@
-<div>
-  <span
+<div class="card">
+  <div
     class="status-badge"
     [class.pending]="status === 'Pending'"
     [class.approved]="status === 'Approved'"
-    [class.rejected]="status === 'Rejected'"
-    [style.width]="'100%'"
+    [class.rejected]="status === 'Rejected'"    
   >
     {{ status }}
-  </span>
+</div>
   @if (status === 'Rejected' && rejectReason.length) {
     <div request-actions class="rejection-reason">
       <mat-icon>info</mat-icon>
-      <span  [style.fontWeight]="'bold'"><small>Reason: </small>{{ rejectReason }}</span>
+      <span  [style.fontWeight]="'bold'">{{ rejectReason }}</span>
     </div>
   }
 </div>

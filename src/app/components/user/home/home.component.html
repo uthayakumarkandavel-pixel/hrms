@@ -1,0 +1,197 @@
+<div class="home-page">
+  <section class="hero-card">
+    <div>
+      <span class="eyebrow">GOOD AFTERNOON</span>
+      <h2>Welcome back</h2>
+      <p>Stay on top of your workday and celebrate the people around you.</p>
+    </div>
+    <div class="hero-date">
+      <span>{{ currentTime() | date: 'EEEE' }}</span>
+      <strong>{{ currentTime() | date: 'dd MMM' }}</strong>
+      <small>{{ currentTime() | date: 'yyyy' }}</small>
+    </div>
+  </section>
+
+  @if (todayCelebrations().length > 0 && showCelebration()) {
+    <section class="celebration-banner" aria-live="polite">
+      <div class="confetti confetti-one"></div>
+      <div class="confetti confetti-two"></div>
+      <div class="confetti confetti-three"></div>
+      <div class="confetti confetti-four"></div>
+      <div class="celebration-icon">🎉</div>
+      <div class="celebration-copy">
+        <span class="eyebrow">TODAY'S CELEBRATION</span>
+        <h3>
+          @if (todayCelebrations().length === 1) {
+            {{ todayCelebrations()[0].name }} is celebrating today!
+          } @else {
+            Your team has something to celebrate today!
+          }
+        </h3>
+        <p>
+          @for (celebration of todayCelebrations(); track celebration.name) {
+            <span>{{ celebration.type === 'birthday' ? 'Birthday' : 'Work Anniversary' }} · {{ celebration.name }}</span>
+          }
+        </p>
+      </div>
+      <button class="celebration-close" type="button" aria-label="Dismiss celebration" (click)="dismissCelebration()">×</button>
+    </section>
+  }
+
+  <section class="home-layout">
+    <div class="main-column">
+      <article class="attendance-card attendance-focus">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">TODAY'S FOCUS</span>
+            <h3>Login / Logout</h3>
+          </div>
+          <span class="attendance-status" [class.working]="isLoggedIn()">
+            {{ isLoggedIn() ? 'Currently working' : 'Not started' }}
+          </span>
+        </div>
+
+        <div class="attendance-main">
+          <div class="working-time">
+            <span>Working hours</span>
+            <strong>{{ totalWorkingHours() }}</strong>
+            <small>{{ isLoggedIn() ? 'Your current session is running' : 'Start your workday when you are ready' }}</small>
+          </div>
+
+          <div class="attendance-meta">
+            <div>
+              <span>Sessions</span>
+              <strong>{{ sessions().length }}</strong>
+            </div>
+            <div>
+              <span>Today</span>
+              <strong>{{ currentTime() | date: 'dd MMM' }}</strong>
+            </div>
+          </div>
+
+          <div class="attendance-action">
+            @if (isLoggedIn()) {
+              <hrms-button label="Logout" icon="logout" (pressed)="logout()" />
+            } @else {
+              <hrms-button label="Login" icon="login" (pressed)="login()" />
+            }
+          </div>
+        </div>
+      </article>
+
+      <article class="employee-card">
+        <div class="employee-header">
+          <div>
+            <span class="eyebrow">THIS MONTH</span>
+            <h3>Employee of the Month</h3>
+          </div>
+          <span class="award-icon">★</span>
+        </div>
+
+        <div class="employee-profile">
+          <div class="employee-avatar">AR</div>
+          <div class="employee-details">
+            <h2>Arjun Rao</h2>
+            <span>Senior Product Designer</span>
+            <p>For outstanding teamwork, ownership and consistent contribution to the team.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <aside class="side-column">
+      @if (todayBirthdays().length > 0) {
+        @for (person of todayBirthdays(); track person.name) {
+          <article class="side-card birthday-card today-card">
+            <div class="side-card-heading">
+              <div>
+                <span class="side-icon birthday-icon">🎂</span>
+                <div>
+                  <span class="eyebrow">TODAY</span>
+                  <h3>Birthday</h3>
+                </div>
+              </div>
+              <span class="today-pill">Celebrate</span>
+            </div>
+
+            <div class="side-person">
+              <div class="avatar avatar-pink">{{ person.initials }}</div>
+              <div>
+                <strong>{{ person.name }}</strong>
+                <p>Send them your wishes today.</p>
+              </div>
+            </div>
+          </article>
+        }
+      }
+
+      @if (todayAnniversaries().length > 0) {
+        @for (person of todayAnniversaries(); track person.name) {
+          <article class="side-card anniversary-card today-card">
+            <div class="side-card-heading">
+              <div>
+                <span class="side-icon anniversary-icon">✦</span>
+                <div>
+                  <span class="eyebrow">TODAY</span>
+                  <h3>Work Anniversary</h3>
+                </div>
+              </div>
+              <span class="today-pill">Celebrate</span>
+            </div>
+
+            <div class="side-person">
+              <div class="avatar avatar-blue">{{ person.initials }}</div>
+              <div>
+                <strong>{{ person.name }}</strong>
+                <p>{{ person.years }} {{ person.years === 1 ? 'year' : 'years' }} with the company.</p>
+              </div>
+            </div>
+          </article>
+        }
+      }
+
+      @if (todayCelebrations().length === 0) {
+        <article class="side-card empty-card">
+          <span class="side-icon">✦</span>
+          <span class="eyebrow">TODAY</span>
+          <h3>No celebrations today</h3>
+          <p>Nothing to celebrate on the calendar today.</p>
+        </article>
+      }
+    </aside>
+  </section>
+
+  @if (sessions().length > 0) {
+    <section class="session-card">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">ATTENDANCE LOG</span>
+          <h3>Today's sessions</h3>
+        </div>
+      </div>
+
+      <div class="session-list">
+        @for (session of sessions(); track session.id; let i = $index) {
+          <div class="session-row">
+            <div class="session-number">{{ i + 1 }}</div>
+            <div class="session-time">
+              <span>Login</span>
+              <strong>{{ session.loginTime | date: 'hh:mm:ss a' }}</strong>
+            </div>
+            <div class="session-divider">→</div>
+            <div class="session-time">
+              <span>Logout</span>
+              <strong>
+                @if (session.logoutTime) {
+                  {{ session.logoutTime | date: 'hh:mm:ss a' }}
+                } @else {
+                  <span class="active-text">In progress</span>
+                }
+              </strong>
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+  }
+</div>
